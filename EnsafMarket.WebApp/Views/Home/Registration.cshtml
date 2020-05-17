@@ -1,0 +1,224 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="zxx">
+
+<head>
+    <title>ENSAFMARKET</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="ENSAFMARKET" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+
+    </script>
+  
+
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    @Styles.Render("~/template/css")
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //Custom-Files -->
+    <!-- Web-Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //Web-Fonts -->
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <div class="container">
+            <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
+                <!-- logo -->
+                <div id="logo">
+                    <h1><a href="@Url.Action("Index","Home")">ENSAFMARKET</a></h1>
+                </div>
+                <!-- //logo -->
+                <!-- nav -->
+                <div class="nav_w3ls ml-lg-5">
+                    <nav>
+                        <label for="drop" class="toggle">Menu</label>
+                        <input type="checkbox" id="drop" />
+                        <ul class="menu">
+                            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li><a href="@Url.Action("About","Home")">About</a></li>
+                            <li><a href="@Url.Action("Index","Home")">Join Now</a></li>
+                            <li>
+                                <!-- First Tier Drop Down -->
+                                <label for="drop-2" class="toggle toogle-2">
+                                    Pages <span class="fa fa-angle-down"
+                                                aria-hidden="true"></span>
+                                </label>
+                                <a href="#">Pages <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                                <input type="checkbox" id="drop-2" />
+                                <ul>
+                                    
+                                    <li><a href="@Url.Action("Index","Home")" class="drop-text">What We Do?</a></li>
+                                    <li><a href="@Url.Action("Index","Home")" class="drop-text">Popular Ads</a></li>
+                                    <li><a href="@Url.Action("Index","Home")" class="drop-text">Statistics</a></li>
+                                    
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
+                            <li><a href="@Url.Action("Login","Home")">Login</a></li>
+                            <li><a href="@Url.Action("Registration","Home")">Register</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- //nav -->
+            </div>
+        </div>
+    </header>
+    <!-- //header -->
+    <!-- inner banner -->
+    <div class="inner-banner-w3ls py-5" id="home">
+        <div class="container py-xl-5 py-lg-3">
+            <!-- register  -->
+            <div class="modal-body mt-md-2 mt-5">
+                <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Register Now</h3>
+                <form action="#" method="post">
+                    <div class="form-group">
+                        <label class="col-form-label">First Name</label>
+                        <input type="text" class="form-control" placeholder="your first name" name="First Name" required="">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Last Name</label>
+                        <input type="text" class="form-control" placeholder="your last name" name="Last Name"
+                               required="">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Birth Date</label>
+                        <input type="date" class="form-control" name="Date" required="">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Address</label>
+                        <input type="text" class="form-control" placeholder="your address" name="Address" required="">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Email</label>
+                        <input type="email" class="form-control" placeholder="toto123@gmail.com" name="Email" required="">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">CNE</label>
+                        <input type="text" class="form-control" placeholder="CNE" name="CNE" required="">
+                    </div>
+                    <div class="form-group">
+                        <label class="gg">Status</label>
+                        <label class="containeer">
+                            Professor
+                            <input value="s1" type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="containeer">
+                            Student
+                            <input value="s2" type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="containeer">
+                            Laureat
+                            <input value="s3" type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+
+                    </div>
+                    <div class="form-group">
+                        <fieldset>
+
+                            <p>
+                                <label class="gg">Major</label>
+                                <select id="myList">
+                                    <option value="1">Génie Informatique</option>
+                                    <option value="2">Génie Industriel</option>
+                                    <option value="3">Génie Mécanique</option>
+                                    <option value="4">Génie Télécommunication et Réseaux</option>
+                                    <option value="5">Génie Systèmes Embarqués</option>
+                                </select>
+                            </p>
+                        </fieldset>
+
+                    </div>
+                    <div class="form-group">
+                        <fieldset>
+
+                            <p>
+                                <label class="gg">Year</label>
+                                <select id="myList">
+                                    <option value="y1">1ère année CP</option>
+                                    <option value="y2">2ème année CP</option>
+                                    <option value="y3">1ère année cycle ingénieur</option>
+                                    <option value="y4">2ème année    cycle ingénieur</option>
+                                    <option value="y5">3ème année cycle ingénieur</option>
+                                    <option value="y6">Lauréats</option>
+                                    <option value="y7">Autre</option>
+                                </select>
+                            </p>
+                        </fieldset>
+
+                    </div>
+                    <div class="form-group">
+                        <fieldset>
+
+                            <p>
+                                <label class="gg">Hobbies</label>
+                                <select id="myList">
+                                    <option value="h1">development</option>
+                                    <option value="h2">reading</option>
+                                    <option value="h3">Robotics</option>
+                                    <option value="h4">Web</option>
+                                    <option value="h5">Computer Science</option>
+                                    <option value="h6">Coding</option>
+                                    <option value="h7">Linguistics</option>
+                                </select>
+                            </p>
+                        </fieldset>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-form-label">Password</label>
+                        <input type="password" class="form-control" placeholder="*****" name="Password" required="">
+                    </div>
+                    <div class="form-group">
+                        <label class="col-form-label">Confirm Password</label>
+                        <input type="password" class="form-control" placeholder="*****" name="Password" required="">
+                    </div>
+
+
+
+
+
+                    <div class="sub-w3l my-3">
+                        <div class="sub-w3layouts_hub">
+                            <input type="checkbox" id="brand1" value="">
+                            <label for="brand1" class="text-li text-style-w3ls">
+                                <span></span>I Accept to the Terms & Conditions
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn button-style-w3">Register</button>
+                </form>
+            </div>
+            <!-- //register -->
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- footer -->
+  
+    <!-- //copyright -->
+    <!-- move top icon -->
+    <a href="#home" class="move-top text-center">
+        <span class="fa fa-angle-double-up" aria-hidden="true"></span>
+    </a>
+    <!-- //move top icon -->
+
+</body>
+
+</html>
