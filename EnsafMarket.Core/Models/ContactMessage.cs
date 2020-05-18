@@ -18,13 +18,11 @@ namespace EnsafMarket.Core.Models
 
         public DateTime DateTime { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         public User User { get; set; }
 
-        [Required]
-        public int ContactId { get; set; }
+        public int? ContactId { get; set; }
 
         public Contact Contact { get; set; }
     }

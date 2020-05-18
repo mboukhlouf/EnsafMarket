@@ -18,20 +18,17 @@ namespace EnsafMarket.Core.Models
 
         public Advertisement Advertisement { get; set; }
 
-        [Required]
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
 
         public User User { get; set; }
 
         public IEnumerable<ContactMessage> Messages { get; set; }
 
-        [Required]
-        public int OwnerFeedbackId { get; set; }
+        public int? OwnerFeedbackId { get; set; }
 
         public ContactFeedback OwnerFeedback { get; set; }
 
-        [Required]
-        public int UserFeedbackId { get; set; }
+        public int? UserFeedbackId { get; set; }
 
         public ContactFeedback UserFeedback { get; set; }
 

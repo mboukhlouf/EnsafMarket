@@ -5,7 +5,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200518211357_Added DbSet of Advertisement, Contact, ContactMessage, ContactFeedback.cs" />
+    <Compile Remove="Migrations\20200518211357_Added DbSet of Advertisement, Contact, ContactMessage, ContactFeedback.Designer.cs" />
+    <Compile Remove="Migrations\20200518211933_Added other models.cs" />
+    <Compile Remove="Migrations\20200518211933_Added other models.Designer.cs" />
+    <Compile Remove="Migrations\20200518212055_Added other models.cs" />
+    <Compile Remove="Migrations\20200518212055_Added other models.Designer.cs" />
+    <Compile Remove="Migrations\20200518212246_Added other modls.cs" />
+    <Compile Remove="Migrations\20200518212246_Added other modls.Designer.cs" />
+    <Compile Remove="Migrations\20200518212356_Added other models.cs" />
+    <Compile Remove="Migrations\20200518212356_Added other models.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\EnsafMarket.Core\EnsafMarket.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.4.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
   </ItemGroup>
 
 </Project>
