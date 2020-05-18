@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EnsafMarket.Core\EnsafMarket.Core.csproj" />
   </ItemGroup>
 
 </Project>
