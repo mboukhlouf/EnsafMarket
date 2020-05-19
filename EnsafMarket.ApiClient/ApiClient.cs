@@ -70,6 +70,12 @@ namespace EnsafMarket.ApiClient
         #endregion
 
         #region Advertisement
+        public async Task<GetAdvertisementsResponse> GetAdvertisementsAsync(GetAdvertisementsRequest request)
+        {
+            var response = await apiProcessor.ProcessPostRequestAsync<GetAdvertisementsResponse>(Endpoints.Advertisement.Get, request);
+            return response;
+        }
+
         public async Task<CreateAdvertisementResponse> CreateAdvertisementAsync(CreateAdvertisementRequest request)
         {
             var response = await apiProcessor.ProcessPostRequestAsync<CreateAdvertisementResponse>(Endpoints.Advertisement.Create, request);

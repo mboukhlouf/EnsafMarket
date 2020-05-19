@@ -18,6 +18,7 @@ namespace EnsafMarket.ApiClient
 
         public static class Advertisement
         {
+            public static EndpointData Get => new EndpointData(new Uri($"{ApiPrefix}/Advertisement/Get"), EndpointSecurityType.None);
             public static EndpointData Create => new EndpointData(new Uri($"{ApiPrefix}/Advertisement/Create"), EndpointSecurityType.ApiKey);
         }
     }

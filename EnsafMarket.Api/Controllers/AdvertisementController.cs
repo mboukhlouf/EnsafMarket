@@ -14,6 +14,7 @@ using EnsafMarket.Core.Models.Api.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 namespace EnsafMarket.Api.Controllers
@@ -27,6 +28,41 @@ namespace EnsafMarket.Api.Controllers
         public AdvertisementController(EnsafMarketDbContext context)
         {
             this.context = context;
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult<GetAdvertisementsResponse>> Get(GetAdvertisementsRequest request)
+        {
+            var ads = context.Advertisement.AsQueryable();
+            // Search
+            if (request.Search != null)
+            {
+                string search = request.Search.Trim().ToLower();
+                ads = ads.Where(ad => ad.Title.ToLower().Contains(search));
+            }  
+
+            // Order by CreationDate
+            ads = ads.OrderByDescending(ad => ad.CreatedAt);
+
+            int totalCount = ads.Count();
+            int start = 0;
+            int count = 10;
+            if (request.Start != null)
+                start = (int)request.Start;
+
+            if (request.Count != null)
+                count = (int)request.Count;
+
+            ads = ads.Skip(start)
+                .Take(count);
+
+            return new GetAdvertisementsResponse
+            {
+                Result = true,
+                Count = totalCount,
+                Advertisements = await ads.ToListAsync()
+            };
         }
 
         [HttpPost]
