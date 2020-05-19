@@ -40,7 +40,21 @@ namespace EnsafMarket.Api.Controllers
             {
                 string search = request.Search.Trim().ToLower();
                 ads = ads.Where(ad => ad.Title.ToLower().Contains(search));
-            }  
+            }
+
+            // Type
+            if (request.Type != null)
+            {
+                var type = (AdvertisementType)request.Type;
+                ads = ads.Where(ad => ad.Type == type);
+            }
+
+            // Content type
+            if (request.ContentType != null)
+            {
+                var contentType = (AdvertisementContentType)request.ContentType;
+                ads = ads.Where(ad => ad.ContentType == contentType);
+            }
 
             // Order by CreationDate
             ads = ads.OrderByDescending(ad => ad.CreatedAt);
