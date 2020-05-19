@@ -15,6 +15,10 @@ namespace EnsafMarket.Core.Models
         [Required]
         public String Title { get; set; }
 
+        public AdvertisementType Type { get; set; }
+
+        public AdvertisementContentType ContentType { get; set; }
+
         public String Description { get; set; }
 
         public DateTime CreatedAt { get; set; }
