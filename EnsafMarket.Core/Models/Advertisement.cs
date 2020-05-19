@@ -13,13 +13,13 @@ namespace EnsafMarket.Core.Models
         public int? Id { get; set; }
 
         [Required]
-        public String Title { get; set; }
+        public string Title { get; set; }
 
         public AdvertisementType Type { get; set; }
 
         public AdvertisementContentType ContentType { get; set; }
 
-        public String Description { get; set; }
+        public string Description { get; set; }
 
         public DateTime CreatedAt { get; set; }
 

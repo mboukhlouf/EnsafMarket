@@ -95,7 +95,7 @@ namespace EnsafMarket.Api.Controllers
             UserClaims userClaims = new UserClaims(user.Id, user.Email);
 
             var token = new JwtSecurityToken(issuer: config["Jwt:Issuer"],
-                audience: config["Jwt:Issuer"],
+                audience: config["Jwt:Audience"],
                 claims: userClaims.Claims.Values,
                 expires: DateTime.Now.AddDays(365),
                 signingCredentials: credentials);

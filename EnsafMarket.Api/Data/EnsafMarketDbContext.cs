@@ -16,7 +16,7 @@ namespace EnsafMarket.Api.Models
 
         public DbSet<EnsafMarket.Core.Models.User> User { get; set; }
 
-        public DbSet<EnsafMarket.Core.Models.Advertisement> Adertisement { get; set; }
+        public DbSet<EnsafMarket.Core.Models.Advertisement> Advertisement { get; set; }
 
         public DbSet<EnsafMarket.Core.Models.Contact> Contact { get; set; }
 
