@@ -28,7 +28,7 @@ namespace EnsafMarket.ApiClient
             ContractResolver = new CamelCasePropertyNamesContractResolver()
         };
 
-        public String Token { get; set; }
+        public string Token { get; set; }
 
         public ApiProcessor()
         {

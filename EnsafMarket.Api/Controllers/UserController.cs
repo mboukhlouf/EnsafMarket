@@ -87,6 +87,33 @@ namespace EnsafMarket.Api.Controllers
             return Ok(response);
         }
 
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<ActionResult<GetUserResponse>> GetAsync(GetUserRequest request)
+        {
+            var response = new GetUserResponse();
+            User user;
+            if(request.Id == null)
+            {
+                UserClaims userClaims = UserClaims.FromClaimsPrincipal(User);
+                if (userClaims == null)
+                {
+                    response.Result = false;
+                    response.Message = "Unauthorized";
+                    return Unauthorized(response);
+                }
+
+                user = await context.User.FindAsync(userClaims.Id);
+            } 
+            else
+            {
+                user = await context.User.FindAsync(request.Id);
+            }
+            response.Result = true;
+            response.User = user;
+            return response;
+        }
+
         private string GenerateJwt(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["Jwt:Key"]));

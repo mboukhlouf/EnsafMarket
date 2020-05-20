@@ -213,6 +213,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Helpers\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +230,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EnsafMarket.ApiClient\EnsafMarket.ApiClient.csproj">
+      <Project>{de79dc1f-f470-46a8-a08a-4527d347468b}</Project>
+      <Name>EnsafMarket.ApiClient</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EnsafMarket.Core\EnsafMarket.Core.csproj">
       <Project>{1b2845cc-1540-46bc-9a76-071d850e8374}</Project>
       <Name>EnsafMarket.Core</Name>

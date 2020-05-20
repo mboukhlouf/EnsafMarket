@@ -14,6 +14,7 @@ namespace EnsafMarket.ApiClient
         {
             public static EndpointData Login => new EndpointData(new Uri($"{ApiPrefix}/User/Login"), EndpointSecurityType.None);
             public static EndpointData Register => new EndpointData(new Uri($"{ApiPrefix}/User/Register"), EndpointSecurityType.None);
+            public static EndpointData Get => new EndpointData(new Uri($"{ApiPrefix}/User/Get"), EndpointSecurityType.ApiKey);
         }
 
         public static class Advertisement

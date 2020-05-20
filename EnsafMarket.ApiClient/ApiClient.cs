@@ -67,6 +67,11 @@ namespace EnsafMarket.ApiClient
             return response;
         }
 
+        public async Task<GetUserResponse> GetUserAsync(GetUserRequest request)
+        {
+            var response = await apiProcessor.ProcessPostRequestAsync<GetUserResponse>(Endpoints.User.Get, request);
+            return response;
+        }
         #endregion
 
         #region Advertisement

@@ -35,11 +35,19 @@ namespace EnsafMarket.Api.Controllers
         public async Task<ActionResult<GetAdvertisementsResponse>> Get(GetAdvertisementsRequest request)
         {
             var ads = context.Advertisement.AsQueryable();
-            // Search
-            if (request.Search != null)
+
+            // Id
+            if(request.Id != null)
             {
-                string search = request.Search.Trim().ToLower();
-                ads = ads.Where(ad => ad.Title.ToLower().Contains(search));
+                var id = (int)request.Id;
+                ads = ads.Where(ad => ad.Id == id);
+            }
+
+            // User Id
+            if (request.UserId != null)
+            {
+                var userId = (int)request.UserId;
+                ads = ads.Where(ad => ad.OwnerId == userId);
             }
 
             // Type
@@ -54,6 +62,13 @@ namespace EnsafMarket.Api.Controllers
             {
                 var contentType = (AdvertisementContentType)request.ContentType;
                 ads = ads.Where(ad => ad.ContentType == contentType);
+            }
+
+            // Search
+            if (request.Search != null)
+            {
+                string search = request.Search.Trim().ToLower();
+                ads = ads.Where(ad => ad.Title.ToLower().Contains(search));
             }
 
             // Order by CreationDate

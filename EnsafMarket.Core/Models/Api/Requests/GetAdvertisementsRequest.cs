@@ -8,11 +8,15 @@ namespace EnsafMarket.Core.Models.Api.Requests
 {
     public class GetAdvertisementsRequest : BaseRequest
     {
+        public int? Id { get; set; }
+
         public string Search { get; set; }
 
         public AdvertisementType? Type { get; set; }
 
         public AdvertisementContentType? ContentType { get; set; }
+
+        public int? UserId { get; set; }
 
         public int? Start { get; set; }
 
