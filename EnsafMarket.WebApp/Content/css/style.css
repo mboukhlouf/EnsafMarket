@@ -1132,6 +1132,16 @@ ul.apps-lists li a.active span {
     position: relative;
     z-index: 1;
 }
+.inner-banner-w3lss {
+    
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    z-index: 1;
+}
 
 /* login */
 .modal-body {
