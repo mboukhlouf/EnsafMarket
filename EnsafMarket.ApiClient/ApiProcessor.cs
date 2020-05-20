@@ -158,11 +158,11 @@ namespace EnsafMarket.ApiClient
 
             var body = await responseMessage.Content.ReadAsStringAsync();
             responseMessage.Dispose();
-            throw CreateAivaException(responseMessage.StatusCode, body);
+            throw CreateApiException(responseMessage.StatusCode, body);
 
         }
 
-        private static ApiException CreateAivaException(HttpStatusCode statusCode, string message)
+        private static ApiException CreateApiException(HttpStatusCode statusCode, string message)
         {
             if (statusCode == HttpStatusCode.Unauthorized)
             {

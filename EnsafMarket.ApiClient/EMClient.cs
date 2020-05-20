@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EnsafMarket.ApiClient
 {
-    public class ApiClient : IDisposable
+    public class EMClient : IDisposable
     {
         private readonly ApiProcessor apiProcessor;
 
@@ -19,9 +19,7 @@ namespace EnsafMarket.ApiClient
             set => apiProcessor.Token = value;
         }
 
-        public string RefreshToken { get; private set; }
-
-        public ApiClient()
+        public EMClient()
         {
             apiProcessor = new ApiProcessor();
         }
@@ -45,7 +43,7 @@ namespace EnsafMarket.ApiClient
             }
         }
 
-        ~ApiClient()
+        ~EMClient()
         {
             Dispose(false);
         }
@@ -55,6 +53,15 @@ namespace EnsafMarket.ApiClient
         {
             var response = await apiProcessor.ProcessPostRequestAsync<RegisterResponse>(Endpoints.User.Register, request);
             return response;
+        }
+
+        public Task<LoginResponse> LoginAsync(string email, string password)
+        {
+            return LoginAsync(new LoginRequest
+            {
+                Email = email,
+                Password = password
+            });
         }
 
         public async Task<LoginResponse> LoginAsync(LoginRequest request)
@@ -67,6 +74,20 @@ namespace EnsafMarket.ApiClient
             return response;
         }
 
+        public Task<GetUserResponse> GetUserAsync()
+        {
+            return GetUserAsync(new GetUserRequest
+            {
+            });
+        }
+
+        public Task<GetUserResponse> GetUserAsync(int id)
+        {
+            return GetUserAsync(new GetUserRequest
+            {
+                Id = id
+            });
+        }
         public async Task<GetUserResponse> GetUserAsync(GetUserRequest request)
         {
             var response = await apiProcessor.ProcessPostRequestAsync<GetUserResponse>(Endpoints.User.Get, request);

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Monsite1
+namespace EnsafMarket.WebApp
 {
     public class BundleConfig
     {

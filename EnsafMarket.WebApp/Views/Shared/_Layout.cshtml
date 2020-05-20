@@ -1,43 +1,163 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@model EnsafMarket.WebApp.ViewModels.BaseViewModel
+
+<!DOCTYPE HTML>
+<html lang="zxx">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Mon application ASP.NET</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    <title>EnsafMarket</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="My School Respo  nsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+
+    @Styles.Render("~/template/css")
+
+
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //Custom-Files -->
+    <!-- Web-Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //Web-Fonts -->
+    <!-- Scripts -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 </head>
+
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+
+    <header>
         <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Nom d'application", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                    <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
+            <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
+                <!-- logo -->
+                <div id="logo">
+                    <h1>@Html.ActionLink("EnsafMarket", "Index", "Home")</h1>
+                </div>
+                <!-- //logo -->
+                <!-- nav -->
+                <div class="nav_w3ls ml-lg-5">
+                    <nav>
+                        <label for="drop" class="toggle">Menu</label>
+                        <input type="checkbox" id="drop" />
+                        <ul class="menu">
+                            <li>@Html.ActionLink("Acceuil", "Index", "Home")</li>
+                            <li>@Html.ActionLink("Offres", "Offers", "Advertisement")</li>
+                            <li>@Html.ActionLink("Demandes", "Demands", "Advertisement")</li>
+
+                            @if (Model.User == null)
+                            {
+                                <li>@Html.ActionLink("Connexion", "Login", "Authentication")</li>
+                                <li>@Html.ActionLink("Inscription", "Register", "Authentication")</li>
+                            }
+                            else
+                            {
+                                <li>@Html.ActionLink("Publier une annonce", "Create", "Advertisement")</li>
+                                <li>
+                                    @Html.ActionLink(Model.User.Email, "Index", "Profile")
+                                    <ul>
+                                        <li>@Html.ActionLink("Tableau de bord", "Index", "Dashboard", "", new { @class = "drop-text" })</li>
+                                        <li>@Html.ActionLink("Se déconnecter", "Logout", "Authentication", "", new { @class = "drop-text" })</li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                </div>
+                <!-- //nav -->
             </div>
         </div>
-    </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Mon application ASP.NET</p>
-        </footer>
-    </div>
+    </header>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    @RenderBody()
+
+    <footer class="py-5">
+        <div class="container py-xl-4 py-lg-3">
+            <div class="row footer-grids">
+                <div class="col-lg-2 col-6 footer-grid">
+                    <h3 class="mb-sm-4 mb-3">Navigation</h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="@Url.Action("Index","Home")">Home</a>
+                        </li>
+                        <li>
+                            <a href="#about"> À propos</a>
+                        </li>
+                        <li>
+                            <a href="#what">Notre But</a>
+                        </li>
+
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 footer-grid">
+                    <h3 class="mb-sm-4 mb-3">Rejoigner nous</h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#join">Inscrivez-vous</a>
+                        </li>
+
+
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 footer-grid footer-contact mt-lg-0 mt-4">
+                    <h3 class="mb-sm-4 mb-3">Appeler nous!</h3>
+                    <ul class="list-unstyled">
+                        <li>
+                            +01(24) 8543 8088
+                        </li>
+                        <li>
+                            <a href="mailto:info@example.com">info@example.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-6 footer-grid text-lg-right">
+                    <ul class="list-unstyled">
+                        <li>
+                            <a href="#stats">Nos Statistiques</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Login","Home")">Connexion</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Registration","Home")">Inscription</a>
+                        </li>
+                        <li>
+                            <a href="#contact">Contactez nous</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-4 footer-grid mt-lg-0 mt-4">
+                    <div class="footer-logo">
+                        <h2 class="text-lg-center text-center">
+                            <a class="logo text-wh font-weight-bold" href="@Url.Action("Index","Home")">
+                                ENSAFMARKET
+                            </a>
+                        </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+
+    <a href="#home" class="move-top text-center">
+        <span class="fa fa-angle-double-up" aria-hidden="true"></span>
+    </a>
+
+
 </body>
+
 </html>
