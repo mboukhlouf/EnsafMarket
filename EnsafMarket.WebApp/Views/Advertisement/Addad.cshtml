@@ -1,13 +1,12 @@
-﻿
-<!DOCTYPE HTML>
+﻿<!DOCTYPE HTML>
 <html lang="zxx">
 
 <head>
-    <title>My School Education Category Bootstrap Responsive website Template | Login :: w3layouts</title>
+    <title>ENSAFMARKET</title>
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
-    <meta name="keywords" content="My School Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <meta name="keywords" content="ENSAFMARKET" />
     <script>
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);
@@ -16,11 +15,13 @@
         function hideURLbar() {
             window.scrollTo(0, 1);
         }
+
     </script>
+
+
     <!-- //Meta tag Keywords -->
-
+    <!-- Custom-Files -->
     @Styles.Render("~/template/css")
-
     <!-- Font-Awesome-Icons-CSS -->
     <!-- //Custom-Files -->
     <!-- Web-Fonts -->
@@ -31,7 +32,7 @@
 </head>
 
 <body>
-    <!---->
+    <!-- header -->
     <header>
         <div class="container">
             <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
@@ -58,14 +59,14 @@
                                 <a href="#">Pages <span class="fa fa-angle-down" aria-hidden="true"></span></a>
                                 <input type="checkbox" id="drop-2" />
                                 <ul>
-                                    
+
                                     <li><a href="@Url.Action("Index","Home")" class="drop-text">Notre But</a></li>
                                     
-                                    <li><a href="@Url.Action("Index","Home")" class="drop-text">Statistique</a></li>
-                                    
+                                    <li><a href="@Url.Action("Index","Home")" class="drop-text">Statistiques</a></li>
+
                                 </ul>
                             </li>
-                            <li><a href="@Url.Action("Contact","Home")" ">Contacter nous</a></li>
+                            <li><a href="@Url.Action("Contact","Home")">Contacter nous</a></li>
                             <li><a href="@Url.Action("Login","Home")">Connexion</a></li>
                             <li><a href="@Url.Action("Registration","Home")">Inscription</a></li>
                         </ul>
@@ -77,49 +78,65 @@
     </header>
     <!-- //header -->
     <!-- inner banner -->
-    <div class="inner-banner-w3ls py-5" id="home">
+    <div class="inner-banner-w3ls py-5" id="addad">
         <div class="container py-xl-5 py-lg-3">
-            <!-- login  -->
-            <div class="modal-body my-5 pt-4">
-                <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Connectez-vous</h3>
+            <!-- register  -->
+            <div class="modal-body mt-md-2 mt-5">
+                <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Ajouter votre annonce</h3>
                 <form action="#" method="post">
                     <div class="form-group">
-                        <label class="col-form-label">Email</label>
-                        <input type="text" class="form-control" placeholder="Email" name="Name" required="">
+
+                        <input type="text" class="form-control" placeholder="Titre de votre annonce" name="Titre annonce" required="">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="gg">Type de l'annonce : </label>
+                        <label class="containeer">
+                            Offre
+                            <input value="s1" type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="containeer">
+                            Demande
+                            <input value="s2" type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
                     <div class="form-group">
-                        <label class="col-form-label">Mot de passe</label>
-                        <input type="password" class="form-control" placeholder="*****" name="Password" required="">
+                        <label class="gg">Contenu de l'annonce : </label>
+                        <label class="containeer">
+                            Produit
+                            <input value="s1" type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="containeer">
+                            Service
+                            <input value="s2" type="radio" name="radio">
+                            <span class="checkmark"></span>
+                        </label>
                     </div>
-                    <button type="submit" class="btn button-style-w3">Connexion</button>
-                    <div class="row sub-w3l mt-3 mb-5">
-                        <div class="col-sm-6 sub-w3layouts_hub">
-                            <input type="checkbox" id="brand1" value="">
-                            <label for="brand1" class="text-li text-style-w3ls">
-                                <span></span> Se souvenir de moi
-                            </label>
-                        </div>
-                        <div class="col-sm-6 forgot-w3l text-sm-right">
-                            <a href="#" class="text-li text-style-w3ls">Mot de passe oublié?</a>
-                        </div>
+
+
+
+
+                    <div class="form-group">
+                        <label class="col-form-label">Description de l'annonce : </label>
+                        <textarea type="text" class="form-control" placeholder="exemple" name="Description" required=""></textarea>
                     </div>
-                    <p class="text-center dont-do text-style-w3ls text-li">
-                        Vous n'avez pas de compte?
-                        <a href="@Url.Action("Registration","Home")" class="font-weight-bold text-li">
-                            Inscrivez vous!
-                        </a>
-                    </p>
+
+
+
+
+
+
+                    <button type="submit" class="btn button-style-w3">Valider l'annonce</button>
                 </form>
             </div>
-            <!-- //login -->
+            <!-- //register -->
         </div>
     </div>
     <!-- //inner banner -->
     <!-- footer -->
-    
-    <!-- //footer -->
-    <!-- copyright -->
-
     <!-- //copyright -->
     <!-- move top icon -->
     <a href="#home" class="move-top text-center">

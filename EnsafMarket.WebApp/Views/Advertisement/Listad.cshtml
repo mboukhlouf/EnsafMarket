@@ -1,0 +1,216 @@
+﻿
+<!DOCTYPE HTML>
+<html lang="zxx">
+
+<head>
+    <title>ENSAFMARKET</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="ENSAFMARKET" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+
+    </script>
+
+
+    <!-- //Meta tag Keywords -->
+    <!-- Custom-Files -->
+    @Styles.Render("~/template/css")
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //Custom-Files -->
+    <!-- Web-Fonts -->
+    <link href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese"
+          rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
+    <!-- //Web-Fonts -->
+</head>
+
+<body>
+    <!-- header -->
+    <header>
+        <div class="container">
+            <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
+                <!-- logo -->
+                <div id="logo">
+                    <h1><a href="@Url.Action("Index","Home")">ENSAFMARKET</a></h1>
+                </div>
+                <!-- //logo -->
+                <!-- nav -->
+                <div class="nav_w3ls ml-lg-5">
+                    <nav>
+                        <label for="drop" class="toggle">Menu</label>
+                        <input type="checkbox" id="drop" />
+                        <ul class="menu">
+                            <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                            <li><a href="@Url.Action("About","Home")">À propos</a></li>
+                            <li><a href="@Url.Action("Index","Home")">Rejoignez nous</a></li>
+                            <li>
+                                <!-- First Tier Drop Down -->
+                                <label for="drop-2" class="toggle toogle-2">
+                                    Pages <span class="fa fa-angle-down"
+                                                aria-hidden="true"></span>
+                                </label>
+                                <a href="#">Pages <span class="fa fa-angle-down" aria-hidden="true"></span></a>
+                                <input type="checkbox" id="drop-2" />
+                                <ul>
+
+                                    <li><a href="@Url.Action("Index","Home")" class="drop-text">Notre But</a></li>
+                                    
+                                    <li><a href="@Url.Action("Index","Home")" class="drop-text">Statistiques</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("Contact","Home")">Contacter nous</a></li>
+                            <li><a href="@Url.Action("Login","Home")">Connexion</a></li>
+                            <li><a href="@Url.Action("Registration","Home")">Inscription</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- //nav -->
+            </div>
+        </div>
+    </header>
+    <!-- //header -->
+    <!-- inner banner -->
+    <div class="inner-banner-w3lss py-5" id="home">
+        <div class="container py-xl-5 py-lg-3">
+            <!-- register  -->
+            <div class="modal-body mt-md-2 mt-5">
+                <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Liste des annonces</h3>
+                <form action="#" method="post">
+                    <div class="input-group">
+                        <div class="input-group-prepend"><span class="input-group-text" style="background-color: #719cff; color: #ffffff"><i class="fa fa-search"></i></span></div><input class="form-control" type="text" placeholder="Je cherche...">
+                        <div class="input-group-append"><button class="btn btn-primary" style="border-color: #719cff; background-color: #719CFF" type="button">Rechercher</button></div>
+                    </div>
+                </form>
+
+
+                &nbsp;
+                <div class="card" style="background-color:#ffffff">
+                    <div class="card-body" style="background-color:#ffffff">
+                        <div class="row">
+                            <div class="col-md-5 col-lg-8">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4>Nom de l'annonce</h4>
+
+                                    </div>
+                                </div> <div style="display: inline;"> <i class='far fa-clock'></i> Publiée il y a  x heures  </div> &nbsp;  &nbsp;
+
+                                &nbsp;
+
+                                <div style="display: inline;">  Service ou produit  </div>
+                            </div>
+                            <div class="col">
+                                <p class="text-muted">
+                                    <br>
+                                    <button class="btn btn-primary" type="button" style="background-color:#FF7F62;">Détails</button>&nbsp;
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                &nbsp;
+                <div class="card" style="background-color:#ffffff">
+                    <div class="card-body" style="background-color:#ffffff">
+                        <div class="row">
+                            <div class="col-md-5 col-lg-8">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4>Nom de l'annonce</h4>
+
+                                    </div>
+                                </div> <div style="display: inline;"> <i class='far fa-clock'></i> Publiée il y a  x heures  </div> &nbsp;  &nbsp;
+
+                                &nbsp;
+
+                                <div style="display: inline;">  Service ou produit  </div>
+                            </div>
+                            <div class="col">
+                                <p class="text-muted">
+                                    <br>
+                                    <button class="btn btn-primary" type="button" style="background-color:#FF7F62;">Détails</button>&nbsp;
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                &nbsp;
+                <div class="card" style="background-color:#ffffff">
+                    <div class="card-body" style="background-color:#ffffff">
+                        <div class="row">
+                            <div class="col-md-5 col-lg-8">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <h4>Nom de l'annonce</h4>
+
+                                    </div>
+                                </div> <div style="display: inline;"> <i class='far fa-clock'></i> Publiée il y a  x heures  </div> &nbsp;  &nbsp;
+
+                                &nbsp;
+
+                                <div style="display: inline;">  Service ou produit  </div>
+                            </div>
+                            <div class="col">
+                                <p class="text-muted">
+                                    <br>
+                                    <button class="btn btn-primary" type="button" style="background-color:#FF7F62;">Détails</button>&nbsp;
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                &nbsp;
+                <div class="card" style="background-color:#ffffff">
+                    <div class="card-body" style="background-color:#ffffff">
+                        <div class="row" style="background-color:#ffffff">
+                            <div class="col-md-12" style="background-color:#ffffff">
+                                <nav>
+                                    <ul class="pagination">
+                                        <li class="page-item"><a class="page-link" aria-label="Previous"><span aria-hidden="true">«</span></a></li>
+                                        <a class="page-link" style="background-color: #719cff">1</a></li>
+                                        <li class="page-item"><a class="page-link">2</a></li>
+                                        <li class="page-item"><a class="page-link">3</a></li>
+                                        <li class="page-item"><a class="page-link">4</a></li>
+                                        <li class="page-item"><a class="page-link">5</a></li>
+                                        <li class="page-item"><a class="page-link" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+            <!-- //register -->
+        </div>
+    </div>
+    <!-- //inner banner -->
+    <!-- footer -->
+    <!-- //copyright -->
+    <!-- move top icon -->
+    <a href="#home" class="move-top text-center">
+        <span class="fa fa-angle-double-up" aria-hidden="true"></span>
+    </a>
+    <!-- //move top icon -->
+
+</body>
+
+</html>

@@ -120,6 +120,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdvertisementController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -156,6 +157,7 @@
     <Content Include="Content\images\g9.jpg" />
     <Content Include="Content\images\img3.png" />
     <Content Include="Content\images\ktsdesign150600005.jpg" />
+    <Content Include="Content\images\okayladies.jpg" />
     <Content Include="Content\images\output-onlinepngtools.png" />
     <Content Include="Content\images\output.onlinepngtools22.jpg" />
     <Content Include="Content\images\p1.jpg" />
@@ -210,6 +212,8 @@
     <Content Include="Views\Shared\_CustomLayout.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
     <Content Include="Views\Home\Registration.cshtml" />
+    <Content Include="Views\Advertisement\Listad.cshtml" />
+    <Content Include="Views\Advertisement\Addad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

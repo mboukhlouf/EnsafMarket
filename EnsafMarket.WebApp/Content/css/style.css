@@ -707,7 +707,7 @@ h3.title-sub span {
 
 /* what */
 .services {
-    background: url(../images/bg3.jpg) center no-repeat fixed;
+    background: url(../images/okayladies.jpg) center no-repeat fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -1124,6 +1124,16 @@ ul.apps-lists li a.active span {
 /* inner banner */
 .inner-banner-w3ls {
     background: url(../images/bg1.jpg) no-repeat center;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    -moz-background-size: cover;
+    -ms-background-size: cover;
+    position: relative;
+    z-index: 1;
+}
+.inner-banner-w3lss {
+    
     background-size: cover;
     -webkit-background-size: cover;
     -o-background-size: cover;
