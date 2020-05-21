@@ -1,3 +1,4 @@
+/// <reference path="jquery.validate.min.js" />
 /*!
  * jQuery Validation Plugin v1.17.0
  *

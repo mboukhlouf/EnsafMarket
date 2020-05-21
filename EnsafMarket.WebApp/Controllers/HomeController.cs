@@ -1,43 +1,43 @@
-﻿using System;
+﻿using EnsafMarket.WebApp.Controllers.Abstract;
+using EnsafMarket.WebApp.ViewModels.Home;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Monsite1.Controllers
+namespace EnsafMarket.WebApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public ActionResult Index()
+        public async Task<ActionResult> Index()
         {
-            return View();
+            await GetUserAsync();
+            return View(new HomeViewModel
+            {
+                User = user
+            });
         }
 
-        public ActionResult About()
+        public async Task<ActionResult> About()
         {
             ViewBag.Message = "Your application description page.";
-
-            return View();
+            await GetUserAsync();
+            return View(new HomeViewModel
+            {
+                User = user
+            });
         }
 
-        public ActionResult Contact()
+        public async Task<ActionResult> Contact()
         {
             ViewBag.Message = "Your contact page.";
-
-            return View();
+            await GetUserAsync();
+            return View(new HomeViewModel
+            {
+                User = user
+            });
         }
-        public ActionResult Login()
-        {
-            ViewBag.Message = "Log In!";
-
-            return View();
-        }
-        public ActionResult Registration()
-        {
-            ViewBag.Message = "Register here!";
-
-            return View();
-        }
-        
     }
 }

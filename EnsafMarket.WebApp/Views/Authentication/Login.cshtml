@@ -1,0 +1,41 @@
+﻿@model EnsafMarket.WebApp.ViewModels.Authentication.LoginViewModel
+@{
+    ViewData["Title"] = "Connexion";
+}
+
+<div class="inner-banner-w3ls py-5" id="home">
+    <div class="container py-xl-5 py-lg-3">
+        <!-- login  -->
+        <div class="modal-body my-5 pt-4">
+            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Connectez-vous</h3>
+            @using (Html.BeginForm("Login", "Authentication", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-form-label" })
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-form-label" })
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                </div>
+                <button type="submit" class="btn button-style-w3">Connexion</button>
+                <div class="row sub-w3l mt-3 mb-5">
+                    <div class="col-sm-6 sub-w3layouts_hub">
+                        <input type="checkbox" id="brand1" value="">
+                        <label for="brand1" class="text-li text-style-w3ls">
+                            <span></span> Se souvenir de moi
+                        </label>
+                    </div>
+                    <div class="col-sm-6 forgot-w3l text-sm-right">
+                        <a href="#" class="text-li text-style-w3ls">Mot de passe oublié?</a>
+                    </div>
+                </div>
+                <p class="text-center dont-do text-style-w3ls text-li">
+                    Vous n'avez pas de compte?
+                    @Html.ActionLink("Inscrivez vous!", "Register", "Authentication", new { @class = "font-weight-bold text-li"})
+                </p>
+            }
+        </div>
+        <!-- //login -->
+    </div>
+</div>
