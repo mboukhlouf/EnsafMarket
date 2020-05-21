@@ -19,6 +19,11 @@ namespace EnsafMarket.WebApp.Controllers
             ViewBag.Message = "Ajouter votre annonce";
             return View();
         }
+        public ActionResult Detailad()
+        {
+            ViewBag.Message = "Consulter les details de l'annonce";
+            return View();
+        }
 
     }
 }
