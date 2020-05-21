@@ -36,8 +36,8 @@ namespace EnsafMarket.WebApp.Controllers.Abstract
 
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
             emClient.Dispose();
+            base.Dispose(disposing);
         }
     }
 }

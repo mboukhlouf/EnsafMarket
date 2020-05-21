@@ -15,11 +15,6 @@ namespace EnsafMarket.WebApp.Controllers
 {
     public class AuthenticationController : BaseController
     {
-        public AuthenticationController()
-        {
-
-        }
-
         // GET: Authentication
         public ActionResult Index()
         {
@@ -32,7 +27,7 @@ namespace EnsafMarket.WebApp.Controllers
             await GetUserAsync();
             if (user != null)
             {
-                RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
             }
             return View(new LoginViewModel());
         }

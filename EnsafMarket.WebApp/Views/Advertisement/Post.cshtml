@@ -1,0 +1,52 @@
+﻿@using EnsafMarket.Core.Models
+
+@model EnsafMarket.WebApp.ViewModels.Advertisement.PostAdvertisementViewModel
+@{
+    ViewData["Title"] = "Publier une annonce";
+}
+
+<!-- inner banner -->
+<div class="inner-banner-w3ls py-5" id="addad">
+    <div class="container py-xl-5 py-lg-3">
+        <!-- register  -->
+        <div class="modal-body mt-md-2 mt-5">
+            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Ajouter votre annonce</h3>
+            @using (Html.BeginForm("Post", "Advertisement", FormMethod.Post))
+            {
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Title, new { @class = "col-form-label" })
+                    @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Type, new { @class = "col-form-label" })
+                    <div class="radio">
+                        <label class="radio-inline" style="color: white;">@Html.RadioButtonFor(m => m.Type, AdvertisementType.Offer, new { @checked = "true" })Offre</label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline" style="color: white;">@Html.RadioButtonFor(m => m.Type, AdvertisementType.Request)Demande</label>
+                    </div>
+                    </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(m => m.ContentType, new { @class = "col-form-label" })
+                    <div class="radio">
+                        <label class="radio-inline" style="color: white;">@Html.RadioButtonFor(m => m.ContentType, AdvertisementContentType.Product, new { @checked = "true" })Produit</label>
+                    </div>
+                    <div class="radio">
+                        <label class="radio-inline" style="color: white;">@Html.RadioButtonFor(m => m.ContentType, AdvertisementContentType.Service)Service</label>
+                    </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Description, new { @class = "col-form-label" })
+                        @Html.TextAreaFor(m => m.Description, new { @class = "form-control" })
+                    </div>
+
+                    <button type="submit" class="btn button-style-w3">Publier</button>
+                    }
+                </div>
+        <!-- //register -->
+    </div>
+</div>
+<!-- //inner banner -->

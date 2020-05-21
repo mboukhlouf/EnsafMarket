@@ -102,6 +102,14 @@ namespace EnsafMarket.ApiClient
             return response;
         }
 
+        public Task<GetAdvertisementsResponse> GetAdvertisementsAsync(int id)
+        {
+            return GetAdvertisementsAsync(new GetAdvertisementsRequest
+            {
+                Id = id
+            });
+        }
+
         public async Task<CreateAdvertisementResponse> CreateAdvertisementAsync(CreateAdvertisementRequest request)
         {
             var response = await apiProcessor.ProcessPostRequestAsync<CreateAdvertisementResponse>(Endpoints.Advertisement.Create, request);
