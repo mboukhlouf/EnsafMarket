@@ -1,4 +1,6 @@
-﻿using EnsafMarket.Core.Models.Api.Requests;
+﻿using EnsafMarket.Core.Models;
+using EnsafMarket.Core.Models.Api.Requests;
+using EnsafMarket.Core.Models.Api.Responses;
 using EnsafMarket.WebApp.Controllers.Abstract;
 using EnsafMarket.WebApp.ViewModels.Advertisement;
 using System;
@@ -74,6 +76,55 @@ namespace EnsafMarket.WebApp.Controllers
                 User = user,
                 Advertisement = advertisement
             });
+        }
+
+        public async Task<ActionResult> Offers(string q = null, int page = 1)
+        {
+            int count = 10;
+            await GetUserAsync();
+            var response = await GetAdvertisementsAsync(AdvertisementType.Offer, q, page);
+
+            ViewData["Title"] = "Offres";
+            return View("List", new ListAdvertisementsModelView
+            {
+                User = user,
+                CurrentPage = page,
+                TotalCount = response.Count,
+                MaxPage = (response.Count / count) + 1,
+                Advertisements = response.Advertisements
+            });
+        }
+
+        public async Task<ActionResult> Requests(string q = null, int page = 1)
+        {
+            int count = 10;
+            await GetUserAsync();
+            var response = await GetAdvertisementsAsync(AdvertisementType.Request, q, page);
+
+            ViewData["Title"] = "Demandes";
+            return View("List", new ListAdvertisementsModelView
+            {
+                User = user,
+                CurrentPage = page,
+                TotalCount = response.Count,
+                MaxPage = (response.Count / count) + 1,
+                Advertisements = response.Advertisements
+            });
+        }
+
+        private async Task<GetAdvertisementsResponse> GetAdvertisementsAsync(AdvertisementType type, string q, int page)
+        {
+            int count = 10;
+            int start = (page - 1) * count;
+            var request = new GetAdvertisementsRequest
+            {
+                Search = q,
+                Type = type,
+                Count = count,
+                Start = start
+            };
+            var response = await emClient.GetAdvertisementsAsync(request);
+            return response;
         }
     }
 }

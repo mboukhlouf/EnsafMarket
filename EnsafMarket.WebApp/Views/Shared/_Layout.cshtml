@@ -25,6 +25,7 @@
 
 
     <!-- Font-Awesome-Icons-CSS -->
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet" />
     <!-- //Custom-Files -->
     <!-- Web-Fonts -->
     <link href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese"
@@ -55,7 +56,7 @@
                         <ul class="menu">
                             <li>@Html.ActionLink("Acceuil", "Index", "Home")</li>
                             <li>@Html.ActionLink("Offres", "Offers", "Advertisement")</li>
-                            <li>@Html.ActionLink("Demandes", "Demands", "Advertisement")</li>
+                            <li>@Html.ActionLink("Demandes", "Requests", "Advertisement")</li>
 
                             @if (Model.User == null)
                             {

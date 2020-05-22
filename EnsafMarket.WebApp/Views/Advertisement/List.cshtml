@@ -1,0 +1,48 @@
+﻿@model EnsafMarket.WebApp.ViewModels.Advertisement.ListAdvertisementsModelView
+
+
+<!-- inner banner -->
+<div class="inner-banner-w3lss py-5" id="home">
+    <div class="container py-xl-5 py-lg-3">
+        <!-- register  -->
+        <div class="modal-body mt-md-2 mt-5">
+            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">
+            @Model.TotalCount @if((string)ViewContext.RouteData.Values["action"] == "Offers")
+            {
+                <text>Offres</text>
+            }
+            else
+            {
+                <text>Demandes</text>
+            }
+            </h3>
+            @using (Html.BeginForm((string)ViewContext.RouteData.Values["action"], (string)ViewContext.RouteData.Values["controller"], FormMethod.Get))
+            {
+                <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text" style="background-color: #719cff; color: #ffffff"><i class="fa fa-search"></i></span></div>
+                    @Html.TextBox("q", "", new { @class = "form-control", placeholder = "Je cherche.." })
+                    <div class="input-group-append"><button class="btn btn-primary" style="border-color: #719cff; background-color: #719CFF" type="button">Chercher</button></div>
+                </div>
+            }
+
+            @foreach (var advertisement in Model.Advertisements)
+            {
+                <text>&nbsp;</text>
+                @Html.Partial("_AdvertisementPartial", advertisement)
+                <text>&nbsp;</text>
+            }
+
+            <nav>
+                <ul class="pagination">
+
+                    @for (int i = 1; i <= Model.MaxPage; i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="@Url.Action((string)ViewContext.RouteData.Values["action"], "Advertisement")?page=@i">@i</a></li>
+                    }
+                </ul>
+            </nav>
+        </div>
+        <!-- //register -->
+    </div>
+</div>
+<!-- //inner banner -->
