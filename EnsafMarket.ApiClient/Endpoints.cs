@@ -64,6 +64,11 @@ namespace EnsafMarket.ApiClient
             {
                 return new EndpointData(new Uri($"{ApiPrefix}/{Controller}"), HttpMethod.Post, EndpointSecurityType.ApiKey);
             }
+
+            public static EndpointData GetSimilarAdvertisements(int id)
+            {
+                return new EndpointData(new Uri($"{ApiPrefix}/{Controller}/{id}/Similar"), HttpMethod.Get, EndpointSecurityType.None);
+            }
         }
 
         public static class Contacts

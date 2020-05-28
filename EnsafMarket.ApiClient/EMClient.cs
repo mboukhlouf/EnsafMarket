@@ -130,6 +130,17 @@ namespace EnsafMarket.ApiClient
             return response;
         }
 
+        public async Task<GetSimilarAdvertisementsResponse> GetSimilarAdvertisementsAsync(int id, int? count = null)
+        {
+            var endpoint = Endpoints.Advertisements.GetSimilarAdvertisements(id);
+            var request = new GetSimilarAdvertisementsRequest
+            {
+                Count = count
+            };
+            var response = await apiProcessor.ProcessRequestAsync<GetSimilarAdvertisementsResponse>(endpoint, request);
+            return response;
+        }
+
         #endregion
 
         #region Contact

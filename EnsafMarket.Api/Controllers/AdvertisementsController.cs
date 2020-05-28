@@ -146,5 +146,46 @@ namespace EnsafMarket.Api.Controllers
             response.Advertisement = advertisement;
             return CreatedAtAction("GetAdvertisement", new { id = advertisement.Id },response);
         }
+
+        // GET: api/Advertisement/5/Similar
+        [HttpGet("{id}/Similar")]
+        [AllowAnonymous]
+        public async Task<ActionResult<GetSimilarAdvertisementsResponse>> GetSimilarAdvertisements(int id, int count = 3)
+        {
+            var currentAdvertisement = await context.Advertisement.FindAsync(id);
+            if (currentAdvertisement == null)
+            {
+                return NotFound(new GetAdvertisementResponse
+                {
+                    Result = false,
+                    Message = "Not found"
+                });
+            }
+
+            var similarAdvertisements = new List<Advertisement>();
+            var possibleAds = context.Advertisement.Where(ad => ad.ContentType == currentAdvertisement.ContentType && ad.Type == currentAdvertisement.Type);
+            
+            if (count > possibleAds.Count())
+            {
+                count = possibleAds.Count();
+            }
+
+            Random rand = new Random(id);
+            while (similarAdvertisements.Count < count)
+            {
+                int toSkip = rand.Next(0, possibleAds.Count());
+                var ad = possibleAds.Skip(toSkip).Take(1).First();
+                if (!similarAdvertisements.Contains(ad))
+                {
+                    similarAdvertisements.Add(ad);
+                }
+            }
+
+            return new GetSimilarAdvertisementsResponse
+            {
+                Result = true,
+                Advertisements = similarAdvertisements
+            };
+        }
     }
 }
