@@ -68,24 +68,29 @@ namespace EnsafMarket.ApiClient
             Dispose(false);
         }
 
-        private async Task<HttpResponseMessage> CreateRequestAsync(EndpointData endpoint, HttpMethod method, BaseRequest requestObject)
+        private async Task<HttpResponseMessage> CreateRequestAsync(EndpointData endpoint, BaseRequest requestObject)
         {
             HttpRequestMessage requestMessage = new HttpRequestMessage();
 
-            if (method == HttpMethod.Get)
+            if (endpoint.Method == HttpMethod.Get)
             {
                 UriBuilder uriBuilder = new UriBuilder(endpoint.Uri);
-                uriBuilder.Query = GenerateQueryString(requestObject);
+                if (requestObject != null) {
+                    uriBuilder.Query = GenerateQueryString(requestObject);
+                }
                 requestMessage.RequestUri = uriBuilder.Uri;
             }
             else
             {
                 requestMessage.RequestUri = endpoint.Uri;
-                string content = JsonConvert.SerializeObject(requestObject, SerializerSettings);
-                requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
+                if (requestObject != null)
+                {
+                    string content = JsonConvert.SerializeObject(requestObject, SerializerSettings);
+                    requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
+                }
             }
 
-            requestMessage.Method = method;
+            requestMessage.Method = endpoint.Method;
 
             if (endpoint.SecurityType == EndpointSecurityType.ApiKey)
             {
@@ -106,27 +111,9 @@ namespace EnsafMarket.ApiClient
             }
         }
 
-        public async Task<T> ProcessGetRequestAsync<T>(EndpointData endpoint, BaseRequest requestObject) where T : class
+        public async Task<T> ProcessRequestAsync<T>(EndpointData endpoint, BaseRequest requestObject = null) where T : class
         {
-            HttpResponseMessage message = await CreateRequestAsync(endpoint, HttpMethod.Get, requestObject);
-            return await HandleJsonResponseAsync<T>(message);
-        }
-
-        public async Task<T> ProcessDeleteRequestAsync<T>(EndpointData endpoint, BaseRequest requestObject) where T : class
-        {
-            HttpResponseMessage message = await CreateRequestAsync(endpoint, HttpMethod.Delete, requestObject);
-            return await HandleJsonResponseAsync<T>(message);
-        }
-
-        public async Task<T> ProcessPostRequestAsync<T>(EndpointData endpoint, BaseRequest requestObject) where T : class
-        {
-            HttpResponseMessage message = await CreateRequestAsync(endpoint, HttpMethod.Post, requestObject);
-            return await HandleJsonResponseAsync<T>(message);
-        }
-
-        public async Task<T> ProcessPutRequestAsync<T>(EndpointData endpoint, BaseRequest requestObject) where T : class
-        {
-            HttpResponseMessage message = await CreateRequestAsync(endpoint, HttpMethod.Put, requestObject);
+            HttpResponseMessage message = await CreateRequestAsync(endpoint, requestObject);
             return await HandleJsonResponseAsync<T>(message);
         }
 
