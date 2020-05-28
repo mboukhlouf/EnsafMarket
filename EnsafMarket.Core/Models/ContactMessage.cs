@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json.Serialization;
 
 namespace EnsafMarket.Core.Models
 {
@@ -20,10 +21,17 @@ namespace EnsafMarket.Core.Models
 
         public int? UserId { get; set; }
 
+        [JsonIgnore]
         public User User { get; set; }
 
         public int? ContactId { get; set; }
 
+        [JsonIgnore]
         public Contact Contact { get; set; }
+
+        public ContactMessage()
+        {
+            DateTime = DateTime.Now;
+        }
     }
 }

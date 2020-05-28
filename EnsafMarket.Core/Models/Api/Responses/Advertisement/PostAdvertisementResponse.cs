@@ -5,7 +5,7 @@ using System.Text;
 
 namespace EnsafMarket.Core.Models.Api.Responses
 {
-    public class CreateAdvertisementResponse : BaseResponse
+    public class PostAdvertisementResponse : BaseResponse
     {
         public Advertisement Advertisement { get; set; }
     }

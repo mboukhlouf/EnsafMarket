@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace EnsafMarket.Core.Models
 {
@@ -12,21 +13,25 @@ namespace EnsafMarket.Core.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Range(1, 5)]
         public int Rating { get; set; }
 
         public string Feedback { get; set; }
 
         [Required]
-        public int AdvertisementId { get; set; }
+        public int ContactId { get; set; }
 
-        public Advertisement Advertisement { get; set; }
+        [JsonIgnore]
+        public Contact Contact { get; set; }
 
         public int? FromUserId { get; set; }
 
+        [JsonIgnore]
         public User FromUser { get; set; }
 
         public int? ToUserId { get; set; }
 
+        [JsonIgnore]
         public User ToUser { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace EnsafMarket.Core.Models.Api.Requests
 {
-    public class CreateAdvertisementRequest : BaseRequest
+    public class PostAdvertisementRequest : BaseRequest
     {
         [Required]
         public string Title { get; set; }

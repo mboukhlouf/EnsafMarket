@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace EnsafMarket.Core.Models
 {
@@ -16,21 +18,43 @@ namespace EnsafMarket.Core.Models
         [Required]
         public int AdvertisementId { get; set; }
 
+        [JsonIgnore]
         public Advertisement Advertisement { get; set; }
 
         public int? UserId { get; set; }
 
+        [JsonIgnore]
         public User User { get; set; }
 
+        [JsonIgnore]
         public IEnumerable<ContactMessage> Messages { get; set; }
 
-        public int? OwnerFeedbackId { get; set; }
+        [JsonIgnore]
+        public IEnumerable<ContactFeedback> Feedbacks { get; set; }
+        
+        [JsonIgnore]
+        public ContactFeedback OwnerFeedback
+        {
+            get
+            {
+                if (Feedbacks == null || Advertisement == null)
+                    return null;
 
-        public ContactFeedback OwnerFeedback { get; set; }
+                return Feedbacks.Where(feedback => feedback.FromUserId == Advertisement.OwnerId).FirstOrDefault();
+            }
+        }
 
-        public int? UserFeedbackId { get; set; }
+        [JsonIgnore]
+        public ContactFeedback UserFeedback
+        {
+            get
+            {
+                if (Feedbacks == null || UserId == null)
+                    return null;
 
-        public ContactFeedback UserFeedback { get; set; }
+                return Feedbacks.Where(feedback => feedback.FromUserId == UserId).FirstOrDefault();
+            }
+        }
 
         public Contact()
         {

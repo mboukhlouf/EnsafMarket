@@ -19,29 +19,23 @@ using Microsoft.Extensions.Configuration;
 
 namespace EnsafMarket.Api.Controllers
 {
-    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class AdvertisementController : ControllerBase
+    [Route("api/[controller]")]
+    public class AdvertisementsController : ControllerBase
     {
         private readonly EnsafMarketDbContext context;
 
-        public AdvertisementController(EnsafMarketDbContext context)
+        public AdvertisementsController(EnsafMarketDbContext context)
         {
             this.context = context;
         }
 
-        [HttpPost]
+        // GET: api/Advertisement
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult<GetAdvertisementsResponse>> Get(GetAdvertisementsRequest request)
+        public async Task<ActionResult<GetAdvertisementsResponse>> GetAdvertisements([FromQuery]GetAdvertisementsRequest request)
         {
             var ads = context.Advertisement.AsQueryable();
-
-            // Id
-            if(request.Id != null)
-            {
-                var id = (int)request.Id;
-                ads = ads.Where(ad => ad.Id == id);
-            }
 
             // User Id
             if (request.UserId != null)
@@ -65,9 +59,9 @@ namespace EnsafMarket.Api.Controllers
             }
 
             // Search
-            if (request.Search != null)
+            if (request.Q != null)
             {
-                string search = request.Search.Trim().ToLower();
+                string search = request.Q.Trim().ToLower();
                 ads = ads.Where(ad => ad.Title.ToLower().Contains(search));
             }
 
@@ -75,30 +69,51 @@ namespace EnsafMarket.Api.Controllers
             ads = ads.OrderByDescending(ad => ad.CreatedAt);
 
             int totalCount = ads.Count();
-            int start = 0;
-            int count = 10;
-            if (request.Start != null)
-                start = (int)request.Start;
 
-            if (request.Count != null)
-                count = (int)request.Count;
+            if (request.Offset != null)
+                ads = ads.Skip((int)request.Offset);
 
-            ads = ads.Skip(start)
-                .Take(count);
+            if (request.Limit != null)
+                ads = ads.Take((int)request.Limit);
 
-            return new GetAdvertisementsResponse
+            var response = new GetAdvertisementsResponse
             {
                 Result = true,
                 Count = totalCount,
                 Advertisements = await ads.ToListAsync()
             };
+            return response;
         }
 
+        // GET: api/Advertisement/5
+        [HttpGet("{id}")]
+        [AllowAnonymous]
+        public async Task<ActionResult<GetAdvertisementResponse>> GetAdvertisement(int id)
+        {
+            var advertisement = await context.Advertisement.FindAsync(id);
+
+            if (advertisement == null)
+            {
+                return NotFound(new GetAdvertisementResponse
+                {
+                    Result = false,
+                    Message = "Not found"
+                });
+            }
+            return new GetAdvertisementResponse
+            {
+                Result = true,
+                Message = "",
+                Advertisement = advertisement
+            };
+        }
+
+        // POST: api/Advertisement
         [HttpPost]
         [Authorize]
-        public async Task<ActionResult<CreateAdvertisementResponse>> Create(CreateAdvertisementRequest request)
+        public async Task<ActionResult<PostAdvertisementResponse>> PostAdvertisement(PostAdvertisementRequest request)
         {
-            CreateAdvertisementResponse response = new CreateAdvertisementResponse();
+            PostAdvertisementResponse response = new PostAdvertisementResponse();
             if (!ModelState.IsValid)
             {
                 response.Result = false;
@@ -107,7 +122,7 @@ namespace EnsafMarket.Api.Controllers
             }
 
             UserClaims userClaims = UserClaims.FromClaimsPrincipal(User);
-            if(userClaims == null)
+            if (userClaims == null)
             {
                 response.Result = false;
                 response.Message = "Unauthorized";
@@ -129,7 +144,7 @@ namespace EnsafMarket.Api.Controllers
             response.Result = true;
             response.Message = "Advertisement created.";
             response.Advertisement = advertisement;
-            return CreatedAtAction("Create", response);
+            return CreatedAtAction("GetAdvertisement", new { id = advertisement.Id },response);
         }
     }
 }

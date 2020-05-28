@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace EnsafMarket.Core.Models
 {
@@ -17,6 +18,7 @@ namespace EnsafMarket.Core.Models
 
         [Required]
         [DataType(DataType.Password)]
+        [JsonIgnore]
         public string Password { get; set; }
 
         public string FirstName { get; set; }
