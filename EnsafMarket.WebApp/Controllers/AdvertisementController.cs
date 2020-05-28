@@ -38,7 +38,7 @@ namespace EnsafMarket.WebApp.Controllers
                 return RedirectToAction("Login", "Authentication");
             }
 
-            var request = new CreateAdvertisementRequest
+            var request = new PostAdvertisementRequest
             {
                 Title = model.Title,
                 Type = model.Type,
@@ -46,7 +46,7 @@ namespace EnsafMarket.WebApp.Controllers
                 Description = model.Description
             };
 
-            var response = await emClient.CreateAdvertisementAsync(request);
+            var response = await emClient.PostAdvertisementAsync(request);
 
             if (response.Result)
             {
@@ -62,12 +62,12 @@ namespace EnsafMarket.WebApp.Controllers
             {
                 return HttpNotFound();
             }
-            var response = await emClient.GetAdvertisementsAsync((int)id);
-            if(response.Count != 1)
+            var response = await emClient.GetAdvertisementAsync((int)id);
+            if(response.Advertisement == null)
             {
                 return HttpNotFound();
             }
-            var advertisement = response.Advertisements.First();
+            var advertisement = response.Advertisement;
             var advertisementUserResponse = await emClient.GetUserAsync(advertisement.OwnerId);
             advertisement.Owner = advertisementUserResponse.User;
             await GetUserAsync();
@@ -118,10 +118,10 @@ namespace EnsafMarket.WebApp.Controllers
             int start = (page - 1) * count;
             var request = new GetAdvertisementsRequest
             {
-                Search = q,
+                Q = q,
                 Type = type,
-                Count = count,
-                Start = start
+                Limit = count,
+                Offset = start
             };
             var response = await emClient.GetAdvertisementsAsync(request);
             return response;
