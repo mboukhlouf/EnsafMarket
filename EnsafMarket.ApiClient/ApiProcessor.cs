@@ -75,7 +75,8 @@ namespace EnsafMarket.ApiClient
             if (endpoint.Method == HttpMethod.Get)
             {
                 UriBuilder uriBuilder = new UriBuilder(endpoint.Uri);
-                if (requestObject != null) {
+                if (requestObject != null)
+                {
                     uriBuilder.Query = GenerateQueryString(requestObject);
                 }
                 requestMessage.RequestUri = uriBuilder.Uri;
@@ -119,7 +120,7 @@ namespace EnsafMarket.ApiClient
 
         private static async Task<T> HandleJsonResponseAsync<T>(HttpResponseMessage responseMessage)
         {
-            if (responseMessage.IsSuccessStatusCode)
+            //  if (responseMessage.IsSuccessStatusCode)
             {
                 var json = await responseMessage.Content.ReadAsStringAsync();
 
@@ -143,10 +144,9 @@ namespace EnsafMarket.ApiClient
                 return obj;
             }
 
-            var body = await responseMessage.Content.ReadAsStringAsync();
-            responseMessage.Dispose();
-            throw CreateApiException(responseMessage.StatusCode, body);
-
+            //  var body = await responseMessage.Content.ReadAsStringAsync();
+            //  responseMessage.Dispose();
+            //    throw CreateApiException(responseMessage.StatusCode, body);
         }
 
         private static ApiException CreateApiException(HttpStatusCode statusCode, string message)

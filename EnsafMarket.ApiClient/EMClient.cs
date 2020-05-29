@@ -151,10 +151,10 @@ namespace EnsafMarket.ApiClient
             return response;
         }
 
-        public async Task<PostContactFeedbackResponse> PostContactAsync(PostContactFeedbackRequest request)
+        public async Task<PostContactResponse> PostContactAsync(PostContactRequest request)
         {
             var endpoint = Endpoints.Contacts.PostContact();
-            var response = await apiProcessor.ProcessRequestAsync<PostContactFeedbackResponse>(endpoint, request);
+            var response = await apiProcessor.ProcessRequestAsync<PostContactResponse>(endpoint, request);
             return response;
         }
 
@@ -165,7 +165,7 @@ namespace EnsafMarket.ApiClient
             return response;
         }
 
-        public async Task<PostContactMessageResponse> PostContactAsync(int id, PostContactMessageRequest request)
+        public async Task<PostContactMessageResponse> PostContactMessageAsync(int id, PostContactMessageRequest request)
         {
             var endpoint = Endpoints.Contacts.PostContactMessage(id);
             var response = await apiProcessor.ProcessRequestAsync<PostContactMessageResponse>(endpoint, request);
