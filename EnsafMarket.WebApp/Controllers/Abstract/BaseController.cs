@@ -2,7 +2,7 @@
 using EnsafMarket.Core.Exceptions;
 using EnsafMarket.Core.Models;
 using EnsafMarket.Core.Models.Api.Requests;
-using EnsafMarket.WebApp.ViewModels.Authentication;
+using EnsafMarket.WebApp.ViewModels;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 

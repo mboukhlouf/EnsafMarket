@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace EnsafMarket.WebApp.ViewModels.Advertisement
+namespace EnsafMarket.WebApp.ViewModels
 {
     public class ListAdvertisementsModelView : BaseViewModel
     {

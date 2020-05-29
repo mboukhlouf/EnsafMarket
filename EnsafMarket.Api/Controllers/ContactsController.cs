@@ -31,8 +31,6 @@ namespace EnsafMarket.Api.Controllers
         public async Task<ActionResult<GetContactResponse>> GetContactAsync(int id)
         {
             var contact = await context.Contact.FindAsync(id);
-            contact.Advertisement = await context.Advertisement.FindAsync(contact.AdvertisementId);
-
             if (contact == null)
             {
                 return NotFound(new GetContactResponse
@@ -41,6 +39,8 @@ namespace EnsafMarket.Api.Controllers
                     Message = "Not found"
                 });
             }
+
+            context.Entry(contact).Reference(nameof(contact.Advertisement)).Load();
 
             UserClaims userClaims = UserClaims.FromClaimsPrincipal(User);
             if (userClaims == null || !(

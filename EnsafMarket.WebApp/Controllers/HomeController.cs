@@ -1,5 +1,5 @@
 ﻿using EnsafMarket.WebApp.Controllers.Abstract;
-using EnsafMarket.WebApp.ViewModels.Home;
+using EnsafMarket.WebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

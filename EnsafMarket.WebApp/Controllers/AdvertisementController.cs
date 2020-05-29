@@ -2,7 +2,7 @@
 using EnsafMarket.Core.Models.Api.Requests;
 using EnsafMarket.Core.Models.Api.Responses;
 using EnsafMarket.WebApp.Controllers.Abstract;
-using EnsafMarket.WebApp.ViewModels.Advertisement;
+using EnsafMarket.WebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +12,19 @@ using System.Web.Mvc;
 
 namespace EnsafMarket.WebApp.Controllers
 {
+    [RoutePrefix("Advertisement")]
     public class AdvertisementController : BaseController
     {
+        // GET: Advertisement
+        [Route]
+        public async Task<ActionResult> Index()
+        {
+            return HttpNotFound();
+        }
+
         // GET: Advertisement/Post
+        [Route("Post")]
+        [HttpGet]
         public async Task<ActionResult> Post()
         {
             await GetUserAsync();
@@ -29,6 +39,7 @@ namespace EnsafMarket.WebApp.Controllers
         }
 
         // POST: Advertisement/Post
+        [Route("Post")]
         [HttpPost]
         public async Task<ActionResult> Post(PostAdvertisementViewModel model)
         {
@@ -56,12 +67,10 @@ namespace EnsafMarket.WebApp.Controllers
             return View(model);
         }
 
-        public async Task<ActionResult> Details(int? id)
+        [Route("{id:int}", Name = "Advertisement Details")]
+        [HttpGet]
+        public async Task<ActionResult> Details(int id)
         {
-            if(id == null)
-            {
-                return HttpNotFound();
-            }
             var response = await emClient.GetAdvertisementAsync((int)id);
             if(response.Advertisement == null)
             {
@@ -71,13 +80,93 @@ namespace EnsafMarket.WebApp.Controllers
             var advertisementUserResponse = await emClient.GetUserAsync(advertisement.OwnerId);
             advertisement.Owner = advertisementUserResponse.User;
             await GetUserAsync();
+
+            var similarAdsResponse = await emClient.GetSimilarAdvertisementsAsync((int)id, 3);
+            var similarAds = similarAdsResponse.Advertisements;
+
             return View(new AdvertisementDetailsModelView
             {
                 User = user,
-                Advertisement = advertisement
+                Advertisement = advertisement,
+                SimilarAdvertisements = similarAds
             });
         }
 
+        [Route("{id:int}")]
+        [HttpPost]
+        public async Task<ActionResult> Details(int id, AdvertisementDetailsModelView model)
+        {
+            var response = await emClient.GetAdvertisementAsync((int)id);
+            if (response.Advertisement == null)
+            {
+                return HttpNotFound();
+            }
+            var advertisement = response.Advertisement;
+            var advertisementUserResponse = await emClient.GetUserAsync(advertisement.OwnerId);
+            advertisement.Owner = advertisementUserResponse.User;
+
+            await GetUserAsync();
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+
+            var similarAdsResponse = await emClient.GetSimilarAdvertisementsAsync((int)id, 3);
+            var similarAds = similarAdsResponse.Advertisements;
+
+            if (user.Id == advertisement.OwnerId)
+            {
+                string errorMessage = "Tu ne peux pas créer un contact avec toi même.";
+                return View(new AdvertisementDetailsModelView
+                {
+                    User = user,
+                    Advertisement = advertisement,
+                    SimilarAdvertisements = similarAds,
+                    ContactMessage = model.ContactMessage,
+                    ErrorMessage = errorMessage
+                });
+            }
+
+            var postContactResponse = await emClient.PostContactAsync(new PostContactRequest
+            {
+                AdvertisementId = (int)advertisement.Id
+            });
+
+            if(!postContactResponse.Result)
+            {
+                string errorMessage = postContactResponse.Message;
+                return View(new AdvertisementDetailsModelView
+                {
+                    User = user,
+                    Advertisement = advertisement,
+                    SimilarAdvertisements = similarAds,
+                    ContactMessage = model.ContactMessage,
+                    ErrorMessage = errorMessage
+                });
+            }
+
+            try
+            {
+                var postContactMessageResponse = await emClient.PostContactMessageAsync(postContactResponse.Contact.Id, new PostContactMessageRequest
+                {
+                    Content = model.ContactMessage
+                });
+            }
+            catch(Exception)
+            {
+            }
+
+            return View(new AdvertisementDetailsModelView
+            {
+                User = user,
+                Advertisement = advertisement,
+                SimilarAdvertisements = similarAds,
+                ContactMessage = model.ContactMessage,
+                ErrorMessage = "DONE!"
+            });
+        }
+
+        [Route("~/Offers")]
         public async Task<ActionResult> Offers(string q = null, int page = 1)
         {
             int count = 10;
@@ -95,6 +184,7 @@ namespace EnsafMarket.WebApp.Controllers
             });
         }
 
+        [Route("~/Requests")]
         public async Task<ActionResult> Requests(string q = null, int page = 1)
         {
             int count = 10;

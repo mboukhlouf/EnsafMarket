@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EnsafMarket.WebApp.ViewModels.Advertisement
+namespace EnsafMarket.WebApp.ViewModels
 {
     public class PostAdvertisementViewModel : BaseViewModel
     {

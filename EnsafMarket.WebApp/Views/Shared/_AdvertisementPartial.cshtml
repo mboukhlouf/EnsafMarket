@@ -1,33 +1,39 @@
 ﻿@model EnsafMarket.Core.Models.Advertisement
 
-<div class="card" style="background-color:#ffffff">
-    <div class="card-body" style="background-color:#ffffff">
-        <div class="row">
-            <div class="col-md-5 col-lg-8">
-                <div class="media">
-                    <div class="media-body">
+@{
+    var type = Model.Type == EnsafMarket.Core.Models.AdvertisementType.Offer ? "Offre" : "Demande";
+    var contentType = Model.ContentType == EnsafMarket.Core.Models.AdvertisementContentType.Product ? "Produit" : "Service";
+    var subtitle = $"{type} de {contentType.ToLower()}";
+}
+
+<div class="card w-100 my-2">
+    <div class="card-body">
+        <div class="row align-items-center">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-12">
                         <h4>@Model.Title</h4>
+                        <p>@subtitle</p>
                     </div>
-                </div> <div style="display: inline;"> <i class='far fa-clock'></i> Date: @Model.CreatedAt </div> &nbsp;  &nbsp;
+                </div>
 
-                &nbsp;
-
-                <div style="display: inline;">
-                    @if(Model.ContentType == EnsafMarket.Core.Models.AdvertisementContentType.Product)
-                    {
-                        <text>Produit</text>
-                    }
-                    else
-                    {
-                        <text>Service</text>
-                    }
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Date:</b>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Model.CreatedAt
+                        </p>
+                    </div>
                 </div>
             </div>
-            <div class="col">
-                <p class="text-muted">
-                    <br>
-                    <a href="@Url.Action("Details", "Advertisement", new { id = Model.Id })"><button class="btn btn-primary" type="button" style="background-color:#FF7F62;">Détails</button></a>&nbsp;
-                </p>
+
+            <div class="col-md-4">
+                @using (Html.BeginForm("Details", "Advertisement", new { id = Model.Id }, FormMethod.Get))
+                {
+                    <button class="btn btn-outline-primary" type="submit">Détails</button>
+                }
             </div>
         </div>
     </div>

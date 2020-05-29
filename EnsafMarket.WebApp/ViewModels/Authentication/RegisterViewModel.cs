@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
-namespace EnsafMarket.WebApp.ViewModels.Authentication
+namespace EnsafMarket.WebApp.ViewModels
 {
     public class RegisterViewModel : BaseViewModel
     {

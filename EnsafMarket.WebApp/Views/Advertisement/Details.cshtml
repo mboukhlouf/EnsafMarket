@@ -1,122 +1,110 @@
-﻿@model EnsafMarket.WebApp.ViewModels.Advertisement.AdvertisementDetailsModelView
+﻿@model EnsafMarket.WebApp.ViewModels.AdvertisementDetailsModelView
 @{
     ViewData["Title"] = "Details annonce";
 }
 
-<!-- inner banner -->
-<div class="inner-banner-w3lss py-5" id="addad">
-    <div class="container py-xl-5 py-lg-3">
-        <!-- register  -->
-        <div class="modal-body mt-md-2 mt-5">
-            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">
-                @if (Model.Advertisement.Type == EnsafMarket.Core.Models.AdvertisementType.Offer)
-                {
-                    <text>Offre</text>
-                }
-                else
-                {
-                    <text>Demande</text>
-                }
-            </h3>
-            <form action="#" method="post">
-                <div class="form-group" style="color:#000000">
-                    <label style="color:#000000">@Model.Advertisement.Title</label>
-                </div>
-                <div class="form-group" style="color:#000000">
-                    <label style="color:#000000">
-                        Type de l'annonce:
-                        @if (Model.Advertisement.ContentType == EnsafMarket.Core.Models.AdvertisementContentType.Product)
-                        {
-                            <text>Produit</text>
-                        }
-                        else
-                        {
-                            <text>Service</text>
-                        }
-                    </label>
-                </div>
-                <div style="display: inline; color:#000000"> Publiée par: @Model.Advertisement.Owner.FirstName @Model.Advertisement.Owner.LastName </div> &nbsp;  &nbsp;
+@{
+    var type = Model.Advertisement.Type == EnsafMarket.Core.Models.AdvertisementType.Offer ? "Offre" : "Demande";
+    var contentType = Model.Advertisement.ContentType == EnsafMarket.Core.Models.AdvertisementContentType.Product ? "Produit" : "Service";
+    var subtitle = $"{type} de {contentType.ToLower()}";
+}
 
-                &nbsp;
-
-                <div style="display: inline; color:#000000">  Date: @Model.Advertisement.CreatedAt</div>
-                &nbsp;
-                <div class="description">
-                    <h5>Description</h5>
-                    <div>
-                        <div class="description contenu"></div>
-                        @Model.Advertisement.Description
-                    </div>
-
-                </div>
-                <button type="submit" class="btn button-style-w3">Contacter le propriétaire</button>
-
-                &nbsp;
-                <br />
-                <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Annonces Similaires</h3>
-
-                <div class="card" style="background-color:#ffffff">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-5 col-lg-8">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h4>Nom de l'annonce</h4>
-
-                                    </div>
-                                </div> <div style="display: inline;"> <i class='far fa-clock'></i> Publiée il y a  x heures  </div> &nbsp;  &nbsp;
-
-                                &nbsp;
-
-                                <div style="display: inline;">  Service ou produit  </div>
-                            </div>
-                            <div class="col">
-                                <p class="text-muted">
-                                    <br>
-                                    <button class="btn btn-primary" type="button" style="background-color:#ff7f62;">Détails</button>&nbsp;
-                                </p>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
-                &nbsp;
-                <div class="card" style="background-color:#ffffff">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-5 col-lg-8">
-                                <div class="media">
-                                    <div class="media-body">
-                                        <h4>Nom de l'annonce</h4>
-
-                                    </div>
-                                </div> <div style="display: inline;"> <i class='far fa-clock'></i> Publiée il y a  x heures  </div> &nbsp;  &nbsp;
-
-                                &nbsp;
-
-                                <div style="display: inline;">  Service ou produit  </div>
-                            </div>
-                            <div class="col">
-                                <p class="text-muted">
-                                    <br>
-                                    <button class="btn btn-primary" type="button" style="background-color:#ff7f62;">Détails</button>&nbsp;
-                                </p>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
-
-
-
-
-            </form>
+<section class="py-5">
+    <div class="container">
+        <div class="row py-4">
+            <div class="col-md-12">
+                <h1>@Model.Advertisement.Title</h1>
+                <p>@subtitle</p>
+            </div>
         </div>
-        <!-- //register -->
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Publiée par:</b>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Model.Advertisement.Owner.FirstName @Model.Advertisement.Owner.LastName
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Date:</b>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Model.Advertisement.CreatedAt
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Description:</b>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>
+                            @Model.Advertisement.Description
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row pt-4">
+                    <div class="col-md-12">
+                        <h2>Contacter</h2>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("Details", "Advertisement", FormMethod.Post))
+                        {
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.ContactMessage)
+                                @Html.TextAreaFor(m => m.ContactMessage, new { @class = "form-control", placeholder = "Message pour le propriétaire de l'annonce", rows = 5 })
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Contacter</button>
+                        }
+                    </div>
+                </div>
+
+                @if (Model.ErrorMessage != null)
+                {
+                    <div class="row pt-4">
+                        <div class="col-md-12">
+                            <div class="alert alert-danger" role="alert">
+                                @Model.ErrorMessage
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <div class="row py-4">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Annonces similaires</h2>
+                    </div>
+                </div>
+
+                @foreach (var similarAdvertisement in Model.SimilarAdvertisements)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Partial("_AdvertisementPartial", similarAdvertisement)
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
     </div>
-</div>
-<!-- //inner banner -->
+</section>

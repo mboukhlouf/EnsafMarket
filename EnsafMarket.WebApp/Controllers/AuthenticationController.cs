@@ -3,7 +3,7 @@ using EnsafMarket.Core.Exceptions;
 using EnsafMarket.Core.Models;
 using EnsafMarket.Core.Models.Api.Requests;
 using EnsafMarket.WebApp.Controllers.Abstract;
-using EnsafMarket.WebApp.ViewModels.Authentication;
+using EnsafMarket.WebApp.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,13 +15,8 @@ namespace EnsafMarket.WebApp.Controllers
 {
     public class AuthenticationController : BaseController
     {
-        // GET: Authentication
-        public ActionResult Index()
-        {
-            return RedirectToAction("Login");
-        }
-
-        // GET: Authentication/Login
+        // GET: Login
+        [Route("Login")]
         public async Task<ActionResult> Login()
         {
             await GetUserAsync();
@@ -32,7 +27,8 @@ namespace EnsafMarket.WebApp.Controllers
             return View(new LoginViewModel());
         }
 
-        // POST: Authentication/Login
+        // POST: Login
+        [Route("Login")]
         [HttpPost]
         public async Task<ActionResult> Login(LoginViewModel model)
         {
@@ -46,7 +42,8 @@ namespace EnsafMarket.WebApp.Controllers
             return RedirectToAction("Index", "Authentication");
         }
 
-        // GET: Authentication/Register
+        // GET: Register
+        [Route("Register")]
         public async Task<ActionResult> Register()
         {
             await GetUserAsync();
@@ -57,7 +54,8 @@ namespace EnsafMarket.WebApp.Controllers
             return View(new RegisterViewModel());
         }
 
-        // POST: Authentication/Register
+        // POST: Register
+        [Route("Register")]
         [HttpPost]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
@@ -86,7 +84,8 @@ namespace EnsafMarket.WebApp.Controllers
             return View(model);
         }
 
-        // GET: Authentication/Logout
+        [Route("Logout")]
+        // GET: Logout
         public ActionResult Logout()
         {
             var cookie = new HttpCookie("token");

@@ -55,7 +55,6 @@ h5,
 h6 {
     margin: 0;
     padding: 0;
-    font-family: 'Lora', serif;
 }
 
 p {
@@ -864,14 +863,6 @@ a.service-btn:hover,
 /* //testimonials */
 
 /* events */
-.card {
-    background-color: #eee;
-    border: none;
-    -webkit-box-shadow: 5px 6px 8px 0 rgba(56, 56, 56, 0.21);
-    -moz-box-shadow: 5px 6px 8px 0 rgba(56, 56, 56, 0.21);
-    box-shadow: 5px 6px 8px 0 rgba(56, 56, 56, 0.21);
-}
-
 h5.card-title a {
     color: #fff;
     font-weight: 400;
