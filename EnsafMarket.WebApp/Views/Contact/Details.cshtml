@@ -7,46 +7,46 @@
 
 <style>
     .rating {
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: center
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center
     }
 
-        .rating > input {
-            display: none
+    .rating > input {
+        display: none
+    }
+
+    .rating > label {
+        position: relative;
+        width: 1em;
+        font-size: 2.5em;
+        color: #FFD600;
+        cursor: pointer
+    }
+
+        .rating > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0
         }
 
-        .rating > label {
-            position: relative;
-            width: 1em;
-            font-size: 2.5em;
-            color: #FFD600;
-            cursor: pointer
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before {
+            opacity: 1 !important
         }
 
-            .rating > label::before {
-                content: "\2605";
-                position: absolute;
-                opacity: 0
-            }
+    .rating > input:checked ~ label:before {
+        opacity: 1
+    }
 
-            .rating > label:hover:before,
-            .rating > label:hover ~ label:before {
-                opacity: 1 !important
-            }
-
-        .rating > input:checked ~ label:before {
-            opacity: 1
-        }
-
-        .rating:hover > input:checked ~ label:before {
-            opacity: 0.4
-        }
+    .rating:hover > input:checked ~ label:before {
+        opacity: 0.4
+    }
 </style>
 
 <section class="py-5">
     <div class="container">
-        <div class="row py-4">
+        <div class="row">
             <div class="col-md-12">
                 <h1>Contact #@Model.Contact.Id</h1>
                 <p>A propos de <a href="@Url.Action("Details", "Advertisement", new { id = Model.Contact.AdvertisementId })">@Model.Contact.Advertisement.Title</a></p>

@@ -2,7 +2,6 @@
 
 <!DOCTYPE HTML>
 <html lang="zxx">
-
 <head>
     <title>EnsafMarket | @ViewData["Title"] </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,47 +18,50 @@
     <link href="~/Content/css/style.css" rel="stylesheet" />
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="header d-lg-flex justify-content-between align-items-center py-2 px-sm-2 px-1">
-                <!-- logo -->
-                <div id="logo">
-                    <h1>@Html.ActionLink("EnsafMarket", "Index", "Home")</h1>
-                </div>
-                <!-- //logo -->
-                <!-- nav -->
-                <div class="nav_w3ls ml-lg-5">
-                    <nav>
-                        <label for="drop" class="toggle">Menu</label>
-                        <input type="checkbox" id="drop" />
-                        <ul class="menu">
-                            <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
-                            <li>@Html.ActionLink("Offres", "Offers", "Advertisement")</li>
-                            <li>@Html.ActionLink("Demandes", "Requests", "Advertisement")</li>
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+        <h4 class="my-0 mr-md-auto font-weight-normal">@Html.ActionLink("EnsafMarket", "Index", "Home")</h4>
+        <nav class="navbar navbar-expand-lg">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    @Html.ActionLink("Accueil", "Index", "Home", null, new { @class = "p-2 text-dark nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Offres", "Offers", "Advertisement", null, new { @class = "p-2 text-dark nav-link" })
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Demandes", "Requests", "Advertisement", null, new { @class = "p-2 text-dark nav-link" })
+                </li>
 
-                            @if (Model.User == null)
-                            {
-                                <li>@Html.ActionLink("Connexion", "Login", "Authentication")</li>
-                                <li>@Html.ActionLink("Inscription", "Register", "Authentication")</li>
-                            }
-                            else
-                            {
-                                <li>@Html.ActionLink("Publier une annonce", "Post", "Advertisement")</li>
-                                <li>
-                                    @Html.ActionLink(Model.User.Email, "Index", "Profile")
-                                    <ul>
-                                        <li>@Html.ActionLink("Tableau de bord", "Index", "Dashboard", "", new { @class = "drop-text" })</li>
-                                        <li>@Html.ActionLink("Se déconnecter", "Logout", "Authentication", "", new { @class = "drop-text" })</li>
-                                    </ul>
-                                </li>
-                            }
-                        </ul>
-                    </nav>
-                </div>
-                <!-- //nav -->
-            </div>
-        </div>
-    </header>
+                @if (Model.User == null)
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Connexion", "Login", "Authentication", null, new { @class = "btn btn-outline-primary mx-2 nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Inscription", "Register", "Authentication", null, new { @class = "btn btn-primary mx-2 nav-link" })
+                    </li>
+                }
+                else
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Publier une annonce", "Post", "Advertisement", null, new { @class = "btn btn-primary mx-2 nav-link" })
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @Model.User.Email
+                        </a>
+                       
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Tableau de bord", "Index", "Dashboard", null, new { @class = "dropdown-item" })
+                            <div class="dropdown-divider"></div>
+                            @Html.ActionLink("Se déconnecter", "Logout", "Authentication", null, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
 
     @RenderBody()
 

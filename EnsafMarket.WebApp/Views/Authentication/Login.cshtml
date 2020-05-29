@@ -13,12 +13,28 @@
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password, new { @class = "col-form-label" })
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
                 </div>
                 <button type="submit" class="btn button-style-w3">Connexion</button>
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (Model.ErrorMessage != null)
+                        {
+                            <div class="row pt-4">
+                                <div class="col-md-12">
+                                    <div class="alert alert-danger" role="alert">
+                                        @Model.ErrorMessage
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
                 <div class="row sub-w3l mt-3 mb-5">
                     <div class="col-sm-6 sub-w3layouts_hub">
                         <input type="checkbox" id="brand1" value="">
@@ -32,7 +48,7 @@
                 </div>
                 <p class="text-center dont-do text-style-w3ls text-li">
                     Vous n'avez pas de compte?
-                    @Html.ActionLink("Inscrivez vous!", "Register", "Authentication", new { @class = "font-weight-bold text-li"})
+                    @Html.ActionLink("Inscrivez vous!", "Register", "Authentication", new { @class = "font-weight-bold text-li" })
                 </p>
             }
         </div>

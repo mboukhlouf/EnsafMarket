@@ -17,5 +17,7 @@ namespace EnsafMarket.WebApp.ViewModels
         [Display(Name = "Mot de passe")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

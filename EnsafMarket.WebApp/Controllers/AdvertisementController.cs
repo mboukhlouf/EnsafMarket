@@ -19,7 +19,7 @@ namespace EnsafMarket.WebApp.Controllers
         [Route]
         public async Task<ActionResult> Index()
         {
-            return HttpNotFound();
+            return RedirectToAction("Offers");
         }
 
         // GET: Advertisement/Post
@@ -156,14 +156,7 @@ namespace EnsafMarket.WebApp.Controllers
             {
             }
 
-            return View(new AdvertisementDetailsModelView
-            {
-                User = user,
-                Advertisement = advertisement,
-                SimilarAdvertisements = similarAds,
-                ContactMessage = model.ContactMessage,
-                ErrorMessage = "DONE!"
-            });
+            return RedirectToAction("Details", "Contact", new { id = postContactResponse.Contact.Id });
         }
 
         [Route("~/Offers")]

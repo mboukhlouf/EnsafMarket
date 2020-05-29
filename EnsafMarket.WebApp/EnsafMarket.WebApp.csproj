@@ -176,6 +176,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\em-theme.css" />
+    <Content Include="Content\css\style-old.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\images\1.jpg" />
     <Content Include="Content\images\about.jpg" />
