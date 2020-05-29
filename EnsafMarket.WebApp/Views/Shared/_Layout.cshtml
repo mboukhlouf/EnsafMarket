@@ -5,40 +5,19 @@
 
 <head>
     <title>EnsafMarket | @ViewData["Title"] </title>
-    <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
     <meta name="keywords" content="My School Respo  nsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
-    <script>
-        addEventListener("load", function () {
-            setTimeout(hideURLbar, 0);
-        }, false);
 
-        function hideURLbar() {
-            window.scrollTo(0, 1);
-        }
-    </script>
-    <!-- //Meta tag Keywords -->
-    <!-- Custom-Files -->
-
-    @Styles.Render("~/template/css")
-
-
-    <!-- Font-Awesome -->
     <script src="https://kit.fontawesome.com/00a551c8a1.js" crossorigin="anonymous"></script>
 
-    <!-- //Custom-Files -->
-    <!-- Web-Fonts -->
-    <link href="//fonts.googleapis.com/css?family=Lora:400,400i,700,700i&amp;subset=cyrillic,cyrillic-ext,latin-ext,vietnamese"
-          rel="stylesheet">
-    <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
-    <!-- //Web-Fonts -->
-    <!-- Scripts -->
-    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Bootstrap theme-->
+    <link href="~/Content/css/em-theme.css" rel="stylesheet" />
+    <!-- Styles -->
+    <link href="~/Content/css/style.css" rel="stylesheet" />
 </head>
-
 <body>
     <header>
         <div class="container">
@@ -84,71 +63,30 @@
 
     @RenderBody()
 
-    <footer class="py-5">
-        <div class="container py-xl-4 py-lg-3">
-            <div class="row footer-grids">
-                <div class="col-lg-2 col-6 footer-grid">
-                    <h3 class="mb-sm-4 mb-3">Navigation</h3>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="@Url.Action("Index","Home")">Accueil</a>
-                        </li>
-                        <li>
-                            <a href="#about"> À propos de nous</a>
-                        </li>
-                        <li>
-                            <a href="#what">Nos services</a>
-                        </li>
-
-                    </ul>
-                </div>
-                <div class="col-lg-2 col-6 footer-grid">
-                    <h3 class="mb-sm-4 mb-3">Rejoignez-nous</h3>
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#join">Inscrivez-vous</a>
-                        </li>
-
-
-                    </ul>
-                </div>
-
-                <div class="col-lg-2 col-6 footer-grid text-lg-right">
-                    <ul class="list-unstyled">
-                        <li>
-                            <a href="#stats">Nos Statistiques</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Login","Home")">Connexion</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Registration","Home")">Inscription</a>
-                        </li>
-                        <li>
-                            <a href="#contact">Contactez-nous</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-lg-4 footer-grid mt-lg-0 mt-4">
-                    <div class="footer-logo">
-                        <h2 class="text-lg-center text-center">
-                            <a class="logo text-wh font-weight-bold" href="@Url.Action("Index","Home")">
-                                ENSAFMARKET
-                            </a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-
+    <div class="footer-basic">
+        <footer>
+            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Home</a></li>
+                <li class="list-inline-item"><a href="#">Services</a></li>
+                <li class="list-inline-item"><a href="#">About</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
+            </ul>
+            <p class="copyright">Company Name © 2017</p>
+        </footer>
+    </div>
 
     <a href="#home" class="move-top text-center">
         <span class="fa fa-angle-double-up" aria-hidden="true"></span>
     </a>
 
+    <!-- Jquery -->
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>
-
 </html>
