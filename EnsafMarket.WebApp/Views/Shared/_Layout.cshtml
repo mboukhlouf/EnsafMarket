@@ -21,7 +21,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 <body>
-    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
         <h4 class="my-0 mr-md-auto font-weight-normal">@Html.ActionLink("EnsafMarket", "Index", "Home")</h4>
         <nav class="navbar navbar-expand-lg">
             <ul class="navbar-nav">
@@ -53,7 +53,7 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             @Model.User.Email
                         </a>
-                       
+
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @Html.ActionLink("Profile", "Index", "Profile", null, new { @class = "dropdown-item" })
                             @Html.ActionLink("Tableau de bord", "Index", "Dashboard", null, new { @class = "dropdown-item" })
@@ -66,11 +66,18 @@
         </nav>
     </div>
 
-    @RenderBody()
+    <div main>
+        @RenderBody()
+    </div>
 
     <div class="footer-basic">
         <footer>
-            <div class="social"><a href="#"><i class="icon ion-social-instagram"></i></a><a href="#"><i class="icon ion-social-snapchat"></i></a><a href="#"><i class="icon ion-social-twitter"></i></a><a href="#"><i class="icon ion-social-facebook"></i></a></div>
+            <div class="social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
             <ul class="list-inline">
                 <li class="list-inline-item"><a href="#">Home</a></li>
                 <li class="list-inline-item"><a href="#">Services</a></li>
@@ -78,7 +85,7 @@
                 <li class="list-inline-item"><a href="#">Terms</a></li>
                 <li class="list-inline-item"><a href="#">Privacy Policy</a></li>
             </ul>
-            <p class="copyright">Company Name © 2017</p>
+            <p class="copyright">EnsafMarket © 2020</p>
         </footer>
     </div>
 

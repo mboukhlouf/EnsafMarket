@@ -1,152 +1,133 @@
 ﻿@using EnsafMarket.WebApp.ViewModels
 @model HomeViewModel
 
-<div class="main-w3pvt mian-content-wthree text-center" id="home">
+<div class="jumbotron">
     <div class="container">
-        <div class="style-banner mx-auto">
-            <h3 class="title-w3 mb-md-5 mb-sm-4 mb-2">Bienvenue à <span> ENSAFMARKET</span> </h3>
-            <p class="mt-3 text-li" id="join">Rejoignez ENSAFMARKET dès maintenant!</p>
-            <!-- form -->
-            <!-- //form -->
-        </div>
-    </div>
-</div>
-
-<section class="w3ls-bnrbtm py-5" id="about">
-    <div class="container py-xl-5 py-lg-3">
-        <h3 class="title-w3 mb-md-5 mb-sm-4 mb-2 text-center font-weight-bold">À propos de nous</h3>
-        <div class="row">
-            <div class="col-lg-6 text-center">
-                <img src="~/Content/images/regis.jpg" alt="about" class="img-fluid mt-4" />
-            </div>
-            <div class="col-lg-6 pr-xl-5 mt-4">
-                <h3 class="title-sub mb-4">Une école est un endroit d'échange et de partage </h3>
-                <p class="sub-para">
-                    Un Marketplace qui permet aux étudiants de l'Ecole Nationale des Sciences Appliquées de Fès de publier
-                    et consulter les annonces, en plus de communiquer avec le propriétaire d'une annonce en toute sécurité.
-                </p>
-
-            </div>
-        </div>
-    </div>
-</section>
-
-<div class="services py-5" id="what">
-    <div class="container py-xl-5 py-lg-3">
-        <h3 class="title-w3 mb-xl-5 mb-sm-4 mb-2 text-center text-wh font-weight-bold" style="color:#fff">Nos Services</h3>
-        <div class="row w3pvtits-services-row text-center">
-            <div class="col-lg-4 serv-w3mk mt-5">
-                <div class="w3pvtits-services-grids">
-                    <span class="fa fa-leanpub ser-icon" aria-hidden="true"></span>
-                    <h4 class="text-bl my-4">Déposer vos Annonces</h4>
-                    <p class="text-left">
-                        Que ce soit une offre ou une demande, un produit ou un service, cette plateforme vous permet de déposer vos
-                        annonces afin qu'ekes soient consultable par d'autres utilisateurs.
-                    </p>
-                  
-                </div>
-            </div>
-            <div class="col-lg-4 serv-w3mk mt-5">
-                <div class="w3pvtits-services-grids">
-                    <span class="fa fa-graduation-cap ser-icon" aria-hidden="true"></span>
-                    <h4 class="text-bl my-4">Consulter les Annonces</h4>
-                    <p class="text-left">Offre l'opportunité à un utilisateur de découvrir les annonces postées par d'autres utilisateurs.</p>
-                 
-                </div>
-            </div>
-            <div class="col-lg-4 serv-w3mk mt-5">
-                <div class="w3pvtits-services-grids">
-                    <span class="fa fa-users ser-icon" aria-hidden="true"></span>
-                    <h4 class="text-bl my-4">Contacter un propriétaire</h4>
-                    <p class="text-left">Notre plateforme vous permettra d'entrer en contact avec le propriétaire d'une annonce à tout moment.</p>
-                   
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-&nbsp;
-&nbsp;
-
-
-&nbsp;
-<div class="middlesection-w3pvt py-sm-5 pt-sm-0 pt-5 mt-5" id="stats">
-    <div class="container py-xl-5 py-lg-3">
-        <div class="offset-lg-4 offset-sm-3 left-build-wthree aboutright-w3pvtwthree">
-            <h3 class="title-w3-2 title-w3 mb-md-5 mb-4 font-weight-bold">Nos Statistiques</h3>
-            <div class="row">
-                <div class="col-4 w3layouts_stats_left w3_counter_grid">
-                    <h4 class="counter">@Model.ProfessorsCount</h4>
-                    <p class="para-text-w3ls text-li let">Professeurs</p>
-                </div>
-                <div class="col-4 w3layouts_stats_left w3_counter_grid2">
-                    <h4 class="counter">@Model.AdvertisementsCount</h4>
-                    <p class="para-text-w3ls text-li let">Annonces</p>
-                </div>
-                <div class="col-4 w3layouts_stats_left w3_counter_grid1">
-                    <h4 class="counter">@Model.StudentsCount</h4>
-                    <p class="para-text-w3ls text-li let">Elèves</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="property-paper">
-        <img src="~/Content/images/img3.png" alt="" class="img-fluid agents-w3" />
-    </div>
-</div>
-
-
-
-
-
-<!--<section class="clients py-5" id="testi">
-    <div class="container py-xl-5 py-lg-3">
-        <h3 class="title-w3 mb-sm-5 mb-4 text-center text-wh font-weight-bold">What Students Say</h3>
-        <div class="feedback-info text-center">
+        <h1 class="display-3">Bienvenue à <span> ENSAFMARKET</span></h1>
+        <p>Rejoignez ENSAFMARKET dès maintenant</p>
+        @if (Model.User == null)
+        {
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit sedc dnmo eiusmod.
-                sed do eiusmod tempor
-                incididunt
-                ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi
+                @Html.ActionLink("Inscription", "Register", "Authentication", null, new { @class = "btn btn-primary btn-lg", role = "button" })
             </p>
-            <img src="~/Content/images/te1.jpg" alt=" " class="img-fluid mt-5">
-            <h4 class="mt-4 text-wh font-weight-bold mb-4">Mary Jane</h4>
+        }
+        else
+        {
+            <p>
+                @Html.ActionLink("Publier une annonce", "Post", "Advertisement", null, new { @class = "btn btn-primary btn-lg", role = "button" })
+            </p>
+        }
+    </div>
+</div>
+
+<div class="container">
+    <hr class="my-5" />
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h1 class="text-center">À propos de nous</h1>
         </div>
     </div>
-</section>!-->
+    <div class="row">
+        <div class="col-md-7 mt-5">
+            <h2>Une école est un endroit d'échange et de partage</h2>
+            <p class="lead">
+                Un Marketplace qui permet aux étudiants de l'Ecole Nationale des Sciences Appliquées de Fès de publier
+                et consulter les annonces, en plus de communiquer avec le propriétaire d'une annonce en toute sécurité.
+            </p>
+        </div>
+        <div class="col-md-5">
+            <img src="~/Content/images/ensaf-home.jpg" alt="Ensaf picture" class="img-fluid mt-4">
+        </div>
+    </div>
 
+    <hr class="my-5" />
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <h4><i class="fa fa-leanpub" aria-hidden="true"></i></h4>
+            <h4 class="text-bl my-4">Déposer vos Annonces</h4>
+            <p class="text-left">
+                Que ce soit une offre ou une demande, un produit ou un service, cette plateforme vous permet de déposer vos
+                annonces afin qu'ekes soient consultable par d'autres utilisateurs.
+            </p>
+        </div>
+        <div class="col-md-4 text-center">
+            <h4><i class="fa fa-graduation-cap" aria-hidden="true"></i></h4>
+            <h4 class="text-bl my-4">Consulter les Annonces</h4>
+            <p class="text-left">Offre l'opportunité à un utilisateur de découvrir les annonces postées par d'autres utilisateurs.</p>
 
+        </div>
+        <div class="col-md-4 text-center">
+            <h4><i class="fa fa-users" aria-hidden="true"></i></h4>
+            <h4 class="text-bl my-4">Contacter un propriétaire</h4>
+            <p class="text-left">Notre plateforme vous permettra d'entrer en contact avec le propriétaire d'une annonce à tout moment.</p>
 
-<section class="contact py-5" id="contact">
-    <div class="container py-xl-5 py-lg-3">
-        <h3 class="title-w3 mb-sm-5 mb-4 text-center text-wh font-weight-bold">Contactez-nous</h3>
-        <div class="contact_grid_right pt-4">
-            <form action="#" method="post">
-                <div class="row contact_left_grid">
-                    <div class="col-lg-6 con-left" data-aos="fade-up">
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="Name" placeholder="Nom" required="">
+        </div>
+    </div>
+
+    <hr class="my-5" />
+
+    <div class="row bg-primary text-white p-4">
+        <div class="col-md-12">
+            <div class="row text-center">
+                <div class="col-md-12">
+                    <h1>Nos statistiques</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <h2 class="text-bl my-4">@Model.ProfessorsCount</h2>
+                            <p>
+                                Professeurs
+                            </p>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" type="email" name="Email" placeholder="Email" required="">
+                        <div class="col-md-4 text-center">
+                            <h2 class="text-bl my-4">@Model.StudentsCount</h2>
+                            <p>
+                                Etudiants
+                            </p>
                         </div>
-                        <div class="form-group">
-                            <input class="form-control" type="text" name="Subject" placeholder="Numéro de téléphone" required="">
-                        </div>
-                    </div>
-                    <div class="col-lg-6 con-right" data-aos="fade-up">
-                        <div class="form-group">
-                            <textarea id="textarea" placeholder="Message" required=""></textarea>
-                        </div>
-                        <div class="sub-honey">
-                            <button class="form-control btn" type="submit">Envoyer</button>
+                        <div class="col-md-4 text-center">
+                            <h2 class="text-bl my-4">@Model.AdvertisementsCount</h2>
+                            <p>
+                                Annonces
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-5" />
+
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h1 class="text-center">Contactez nous</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <form action="#" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="text" name="Name" placeholder="Nom" required="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="email" name="Email" placeholder="Email" required="">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" name="Subject" placeholder="Numéro de téléphone" required="">
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" id="textarea" placeholder="Message" required=""></textarea>
+                </div>
+                <button class="btn btn-primary" type="submit">Envoyer</button>
             </form>
         </div>
     </div>
-</section>
+
+    <hr class="my-5" />
+</div>
