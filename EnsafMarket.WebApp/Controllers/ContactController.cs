@@ -31,7 +31,7 @@ namespace EnsafMarket.WebApp.Controllers
             }
             var contact = response.Contact;
 
-            var advertisementResponse = await emClient.GetAdvertisementAsync(contact.Id);
+            var advertisementResponse = await emClient.GetAdvertisementAsync(contact.AdvertisementId);
             contact.Advertisement = advertisementResponse.Advertisement;
 
             var ownerResponse = await emClient.GetUserAsync(contact.Advertisement.OwnerId);
@@ -93,7 +93,7 @@ namespace EnsafMarket.WebApp.Controllers
             }
             var contact = response.Contact;
 
-            var advertisementResponse = await emClient.GetAdvertisementAsync(contact.Id);
+            var advertisementResponse = await emClient.GetAdvertisementAsync(contact.AdvertisementId);
             contact.Advertisement = advertisementResponse.Advertisement;
 
             var ownerResponse = await emClient.GetUserAsync(contact.Advertisement.OwnerId);
