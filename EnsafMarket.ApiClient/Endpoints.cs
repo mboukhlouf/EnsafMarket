@@ -110,5 +110,15 @@ namespace EnsafMarket.ApiClient
                 return new EndpointData(new Uri($"{ApiPrefix}/{Controller}/{id}/Feedbacks"), HttpMethod.Put, EndpointSecurityType.ApiKey);
             }
         }
+
+        public static class Stats
+        {
+            private static string Controller { get; } = "Stats";
+
+            public static EndpointData GetStats()
+            {
+                return new EndpointData(new Uri($"{ApiPrefix}/{Controller}"), HttpMethod.Get, EndpointSecurityType.None);
+            }
+        }
     }
 }

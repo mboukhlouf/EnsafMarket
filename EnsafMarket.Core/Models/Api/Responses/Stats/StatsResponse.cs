@@ -1,11 +1,11 @@
-﻿using System;
+﻿using EnsafMarket.Core.Models.Api.Responses.Abstract;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Text;
 
-namespace EnsafMarket.WebApp.ViewModels
+namespace EnsafMarket.Core.Models.Api.Responses
 {
-    public class HomeViewModel : BaseViewModel
+    public class StatsResponse : BaseResponse
     {
         public int StudentsCount { get; set; }
 

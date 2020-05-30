@@ -11,15 +11,21 @@ namespace EnsafMarket.WebApp.Controllers
 {
     public class HomeController : BaseController
     {
+        [Route("")]
         public async Task<ActionResult> Index()
         {
             await GetUserAsync();
+            var statsResponse = await emClient.GetStatsAsync();
             return View(new HomeViewModel
             {
-                User = user
+                User = user,
+                StudentsCount = statsResponse.StudentsCount,
+                ProfessorsCount = statsResponse.ProfessorsCount,
+                AdvertisementsCount = statsResponse.AdvertisementsCount
             });
         }
 
+        [Route("About")]
         public async Task<ActionResult> About()
         {
             ViewBag.Message = "Your application description page.";
@@ -30,6 +36,7 @@ namespace EnsafMarket.WebApp.Controllers
             });
         }
 
+        [Route("ContactUs")]
         public async Task<ActionResult> Contact()
         {
             ViewBag.Message = "Your contact page.";

@@ -194,5 +194,14 @@ namespace EnsafMarket.ApiClient
         }
 
         #endregion
+
+        #region "Stats"
+        public async Task<StatsResponse> GetStatsAsync()
+        {
+            var endpoint = Endpoints.Stats.GetStats();
+            var response = await apiProcessor.ProcessRequestAsync<StatsResponse>(endpoint);
+            return response;
+        }
+        #endregion
     }
 }

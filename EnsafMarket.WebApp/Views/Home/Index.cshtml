@@ -1,4 +1,6 @@
-﻿
+﻿@using EnsafMarket.WebApp.ViewModels
+@model HomeViewModel
+
 <div class="main-w3pvt mian-content-wthree text-center" id="home">
     <div class="container">
         <div class="style-banner mx-auto">
@@ -76,15 +78,15 @@
             <h3 class="title-w3-2 title-w3 mb-md-5 mb-4 font-weight-bold">Nos Statistiques</h3>
             <div class="row">
                 <div class="col-4 w3layouts_stats_left w3_counter_grid">
-                    <h4 class="counter">3+</h4>
+                    <h4 class="counter">@Model.ProfessorsCount</h4>
                     <p class="para-text-w3ls text-li let">Professeurs</p>
                 </div>
                 <div class="col-4 w3layouts_stats_left w3_counter_grid2">
-                    <h4 class="counter">3+</h4>
+                    <h4 class="counter">@Model.AdvertisementsCount</h4>
                     <p class="para-text-w3ls text-li let">Annonces</p>
                 </div>
                 <div class="col-4 w3layouts_stats_left w3_counter_grid1">
-                    <h4 class="counter">5+</h4>
+                    <h4 class="counter">@Model.StudentsCount</h4>
                     <p class="para-text-w3ls text-li let">Elèves</p>
                 </div>
             </div>
