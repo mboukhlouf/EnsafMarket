@@ -41,6 +41,8 @@ namespace EnsafMarket.Api.Controllers
             }
 
             context.Entry(contact).Reference(nameof(contact.Advertisement)).Load();
+            context.Entry(contact.Advertisement).Reference(nameof(contact.Advertisement.Owner)).Load();
+            context.Entry(contact).Reference(nameof(contact.User)).Load();
 
             UserClaims userClaims = UserClaims.FromClaimsPrincipal(User);
             if (userClaims == null || !(
@@ -53,7 +55,7 @@ namespace EnsafMarket.Api.Controllers
                     Message = "Unauthorized"
                 });
             }
-            contact.Advertisement = null;
+
             return new GetContactResponse
             {
                 Result = true,
@@ -143,6 +145,7 @@ namespace EnsafMarket.Api.Controllers
 
             var contactMessages = context.ContactMessage.Where(message => message.ContactId == id)
                 .OrderByDescending(message => message.DateTime)
+                .Include(nameof(ContactMessage.User))
                 .ToList();
 
             var response = new GetContactMessagesResponse

@@ -24,6 +24,10 @@ namespace EnsafMarket.WebApp.Controllers
         public async Task<ActionResult> Details(int id)
         {
             await GetUserAsync();
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
             var response = await emClient.GetContactAsync((int)id);
             if (response.Contact == null)
             {
@@ -31,7 +35,7 @@ namespace EnsafMarket.WebApp.Controllers
             }
             var contact = response.Contact;
 
-            var advertisementResponse = await emClient.GetAdvertisementAsync(contact.AdvertisementId);
+         /*   var advertisementResponse = await emClient.GetAdvertisementAsync(contact.AdvertisementId);
             contact.Advertisement = advertisementResponse.Advertisement;
 
             var ownerResponse = await emClient.GetUserAsync(contact.Advertisement.OwnerId);
@@ -46,7 +50,7 @@ namespace EnsafMarket.WebApp.Controllers
                 var userResponse = await emClient.GetUserAsync((int)contact.UserId);
                 contact.User = userResponse.User;
             }
-
+            */
             if (user.Id != contact.UserId && user.Id != contact.Advertisement.OwnerId)
             {
                 return HttpNotFound();
@@ -86,6 +90,11 @@ namespace EnsafMarket.WebApp.Controllers
         public async Task<ActionResult> Details(int id, ContactDetailsModelView model)
         {
             await GetUserAsync();
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+
             var response = await emClient.GetContactAsync((int)id);
             if (response.Contact == null)
             {
@@ -93,12 +102,14 @@ namespace EnsafMarket.WebApp.Controllers
             }
             var contact = response.Contact;
 
+            /*
             var advertisementResponse = await emClient.GetAdvertisementAsync(contact.AdvertisementId);
             contact.Advertisement = advertisementResponse.Advertisement;
 
             var ownerResponse = await emClient.GetUserAsync(contact.Advertisement.OwnerId);
             contact.Advertisement.Owner = ownerResponse.User;
-
+            */
+            /*
             if(contact.UserId == user.Id)
             {
                 contact.User = user;
@@ -108,7 +119,7 @@ namespace EnsafMarket.WebApp.Controllers
                 var userResponse = await emClient.GetUserAsync((int)contact.UserId);
                 contact.User = userResponse.User;
             }
-
+            */
             if (user.Id != contact.UserId && user.Id != contact.Advertisement.OwnerId)
             {
                 return HttpNotFound();

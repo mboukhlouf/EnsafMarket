@@ -76,6 +76,7 @@ namespace EnsafMarket.Api.Controllers
             if (request.Limit != null)
                 ads = ads.Take((int)request.Limit);
 
+            ads = ads.Include(nameof(Advertisement.Owner));
             var response = new GetAdvertisementsResponse
             {
                 Result = true,
@@ -100,6 +101,7 @@ namespace EnsafMarket.Api.Controllers
                     Message = "Not found"
                 });
             }
+            context.Entry(advertisement).Reference(nameof(advertisement.Owner)).Load();
             return new GetAdvertisementResponse
             {
                 Result = true,
@@ -163,8 +165,9 @@ namespace EnsafMarket.Api.Controllers
             }
 
             var similarAdvertisements = new List<Advertisement>();
-            var possibleAds = context.Advertisement.Where(ad => ad.ContentType == currentAdvertisement.ContentType && ad.Type == currentAdvertisement.Type);
-            
+            var possibleAds = context.Advertisement.Where(ad => ad.ContentType == currentAdvertisement.ContentType && ad.Type == currentAdvertisement.Type)
+                                                    .Include(nameof(Advertisement.Owner));
+
             if (count > possibleAds.Count())
             {
                 count = possibleAds.Count();

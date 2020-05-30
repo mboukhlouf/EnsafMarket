@@ -27,6 +27,17 @@
                         </p>
                     </div>
                 </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Par:</b>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Html.ActionLink($"{Model.Owner.FirstName} {Model.Owner.LastName}", "Details", "Profile", new { id = Model.OwnerId }, null)
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <div class="col-md-4">

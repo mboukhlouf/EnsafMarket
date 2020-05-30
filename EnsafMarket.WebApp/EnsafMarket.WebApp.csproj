@@ -159,6 +159,7 @@
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\Abstract\BaseController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
@@ -172,9 +173,12 @@
     <Compile Include="ViewModels\Authentication\RegisterViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Contact\ContactDetailsModelView.cs" />
+    <Compile Include="ViewModels\Dashboard\DashboardViewModel.cs" />
     <Compile Include="ViewModels\Home\HomeViewModel.cs" />
+    <Compile Include="ViewModels\Profile\ProfileViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\em-theme.css" />
     <Content Include="Content\css\style-old.css" />
     <Content Include="Content\css\style.css" />
@@ -257,7 +261,7 @@
     <Content Include="Views\Advertisement\List.cshtml" />
     <Content Include="Views\Advertisement\Post.cshtml" />
     <Content Include="Views\Advertisement\Details.cshtml" />
-    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Profile\Details.cshtml" />
     <Content Include="Views\Shared\_AdvertisementPartial.cshtml" />
     <Content Include="Views\Contact\Details.cshtml" />
     <Content Include="Views\Shared\_ContactMessagePartial.cshtml" />

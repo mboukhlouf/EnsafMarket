@@ -3,15 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
+
+using EnsafMarket.WebApp.Controllers.Abstract;
+using EnsafMarket.WebApp.ViewModels;
 
 namespace EnsafMarket.WebApp.Controllers
 {
-    public class ProfileController : Controller
+    [RoutePrefix("Profile")]
+    public class ProfileController : BaseController
     {
-        // GET: Profile
-        public ActionResult Index()
+        [Route]
+        public async Task<ActionResult> Index()
         {
-            return View();
+            await GetUserAsync();
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
+            return RedirectToAction("Details", new { id = user.Id });
+        }
+
+        [Route("{id:int}")]
+        public async Task<ActionResult> Details(int id)
+        {
+            await GetUserAsync();
+
+            var userResponse = await emClient.GetUserAsync(id);
+            if(!userResponse.Result)
+            {
+                return HttpNotFound();
+            }
+
+            var user = userResponse.User;
+            var advertisementsResponse = await emClient.GetUserAdvertisementsAsync(user.Id);
+            var advertisements = advertisementsResponse.Advertisements;
+
+            foreach(var ad in advertisements)
+            {
+                ad.Owner = user;
+            }
+
+            return View(new ProfileViewModel
+            {
+                User = user,
+                ProfileUser = user,
+                Advertisements = advertisements
+            });
         }
     }
 }

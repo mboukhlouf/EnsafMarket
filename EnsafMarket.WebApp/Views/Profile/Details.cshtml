@@ -1,0 +1,101 @@
+﻿@using EnsafMarket.WebApp.ViewModels
+@using EnsafMarket.Core.Models
+
+@model ProfileViewModel
+
+@{
+    ViewData["Title"] = $"{Model.ProfileUser.FirstName} {Model.ProfileUser.LastName}";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>@Model.ProfileUser.FirstName @Model.ProfileUser.LastName</h1>
+                <p>
+                    @switch (Model.ProfileUser.Status)
+                    {
+                        case UserStatus.Student:
+                            <text>Etudiant</text>
+                            break;
+                        case UserStatus.Professor:
+                            <text>Professeur</text>
+                            break;
+                        case UserStatus.Laureat:
+                            <text>Lauréat</text>
+                            break;
+                    }
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Adresse email:</b>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Model.ProfileUser.Email
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Filière:</b>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Model.ProfileUser.Major
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <b>Année:</b>
+                    </div>
+                    <div class="col-md-8">
+                        <p>
+                            @Model.ProfileUser.Year
+                        </p>
+                    </div>
+                </div>
+
+                <div class="row py-4">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h2>Ses annonces</h2>
+                            </div>
+                        </div>
+
+                        @if (Model.Advertisements != null && Model.Advertisements.Count() > 0)
+                        {
+                            foreach (var advertisement in Model.Advertisements)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.Partial("_AdvertisementPartial", advertisement)
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        Cet utilisateur n'a pas d'annonces publiées
+                                    </p>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

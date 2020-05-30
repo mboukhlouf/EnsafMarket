@@ -21,7 +21,6 @@ namespace EnsafMarket.Core.Models
 
         public int? UserId { get; set; }
 
-        [JsonIgnore]
         public User User { get; set; }
 
         public int? ContactId { get; set; }

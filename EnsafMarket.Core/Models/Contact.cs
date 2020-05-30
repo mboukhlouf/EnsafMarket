@@ -18,12 +18,10 @@ namespace EnsafMarket.Core.Models
         [Required]
         public int AdvertisementId { get; set; }
 
-        [JsonIgnore]
         public Advertisement Advertisement { get; set; }
 
         public int? UserId { get; set; }
 
-        [JsonIgnore]
         public User User { get; set; }
 
         [JsonIgnore]

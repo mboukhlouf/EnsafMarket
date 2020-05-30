@@ -110,9 +110,19 @@ namespace EnsafMarket.Api.Controllers
             {
                 user = await context.User.FindAsync(id);
             }
-            response.Result = true;
-            response.User = user;
-            return response;
+
+            if(user != null)
+            {
+                response.Result = true;
+                response.User = user;
+                return response;
+            }
+            else
+            {
+                response.Result = false;
+                response.Message = "User not found.";
+                return NotFound(response);
+            }
         }
 
         [HttpGet("{id}/Advertisements")]
