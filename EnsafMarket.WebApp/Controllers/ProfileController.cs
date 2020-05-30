@@ -35,19 +35,19 @@ namespace EnsafMarket.WebApp.Controllers
                 return HttpNotFound();
             }
 
-            var user = userResponse.User;
-            var advertisementsResponse = await emClient.GetUserAdvertisementsAsync(user.Id);
+            var profileUser = userResponse.User;
+            var advertisementsResponse = await emClient.GetUserAdvertisementsAsync(profileUser.Id);
             var advertisements = advertisementsResponse.Advertisements;
 
             foreach(var ad in advertisements)
             {
-                ad.Owner = user;
+                ad.Owner = profileUser;
             }
 
             return View(new ProfileViewModel
             {
                 User = user,
-                ProfileUser = user,
+                ProfileUser = profileUser,
                 Advertisements = advertisements
             });
         }
