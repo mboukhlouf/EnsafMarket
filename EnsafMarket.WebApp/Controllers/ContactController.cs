@@ -178,7 +178,7 @@ namespace EnsafMarket.WebApp.Controllers
 
             foreach (var message in contactMessages)
             {
-                message.User = message.UserId == user.Id ? user : contact.Advertisement.Owner;
+                message.User = message.UserId == contact.UserId ? contact.User : contact.Advertisement.Owner;
             }
             model.User = user;
             model.Contact = contact;
