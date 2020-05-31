@@ -69,5 +69,7 @@ namespace EnsafMarket.WebApp.ViewModels
         [Display(Name = "Loisirs")]
         [DataType(DataType.Text)]
         public string Hobbies { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }

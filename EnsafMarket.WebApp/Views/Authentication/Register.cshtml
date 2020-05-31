@@ -5,7 +5,7 @@
 @{
     ViewData["Title"] = "Inscription";
     ViewData["Majors"] = new List<string>()
-    {
+{
         "Génie Informatique",
         "Génie Industriel",
         "Génie Mécanique",
@@ -13,7 +13,7 @@
         "Génie Systèmes Embarqués"
     };
     ViewData["Years"] = new List<string>()
-    {
+{
         "1ère année CP",
         "2ème année CP",
         "1ère année cycle ingénieur",
@@ -24,83 +24,100 @@
     };
 }
 
-<!-- inner banner -->
-<div class="inner-banner-w3ls py-5" id="home">
-    <div class="container py-xl-5 py-lg-3">
-        <!-- register  -->
-        <div class="modal-body mt-md-2 mt-5">
-            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Inscription</h3>
+<div class="container py-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <h1>Inscription</h1>
+        </div>
+    </div>
+
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
             @using (Html.BeginForm("Register", "Authentication", FormMethod.Post))
             {
                 <div class="form-group">
                     @Html.LabelFor(m => m.LastName, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.LastName)
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.FirstName, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.FirstName)
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Email, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.Email, new { @type = "email", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email)
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Password, new { @class = "col-form-label" })
                     @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-form-label" })
                     @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.ConfirmPassword)
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.DateOfBirth, new { @type = "date", @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.DateOfBirth)
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Address, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Address)
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(m => m.Cne, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.Cne, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Cne)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Status, new { @class = "col-form-label" })
-                    @Html.DropDownListFor(m => m.Status, new SelectList(Enum.GetValues(typeof(UserStatus))), 
+                    @Html.DropDownListFor(m => m.Status, new SelectList(Enum.GetValues(typeof(UserStatus))),
                     new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Status)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Major, new { @class = "col-form-label" })
                     @Html.DropDownListFor(m => m.Major, new SelectList((List<string>)ViewData["Majors"]),
                     new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Major)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Year, new { @class = "col-form-label" })
                     @Html.DropDownListFor(m => m.Year, new SelectList((List<string>)ViewData["Years"]),
                     new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Year)
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.Hobbies, new { @class = "col-form-label" })
                     @Html.TextBoxFor(m => m.Hobbies, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Hobbies)
                 </div>
 
-                <div class="sub-w3l my-3">
-                    <div class="sub-w3layouts_hub">
-                        <input type="checkbox" id="brand1" value="">
-                        <label for="brand1" class="text-li text-style-w3ls">
-                            <span></span>J'accepte les termes et les conditions
-                        </label>
-                    </div>
-                </div>
                 <button type="submit" class="btn btn-primary">Inscrivez-vous</button>
             }
+
+            @if (Model.ErrorMessage != null)
+            {
+                <div class="row pt-4">
+                    <div class="col-md-12">
+                        <div class="alert alert-danger" role="alert">
+                            @Model.ErrorMessage
+                        </div>
+                    </div>
+                </div>
+            }
         </div>
-        <!-- //register -->
     </div>
 </div>

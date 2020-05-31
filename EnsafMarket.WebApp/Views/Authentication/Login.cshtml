@@ -3,11 +3,14 @@
     ViewData["Title"] = "Connexion";
 }
 
-<div class="inner-banner-w3ls py-5" id="home">
-    <div class="container py-xl-5 py-lg-3">
-        <!-- login  -->
-        <div class="modal-body my-5 pt-4">
-            <h3 class="title-w3 mb-5 text-center text-wh font-weight-bold">Connectez-vous</h3>
+<div class="container py-5">
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
+            <h1>Connectez-vous</h1>
+        </div>
+    </div>
+    <div class="row justify-content-md-center">
+        <div class="col-md-8">
             @using (Html.BeginForm("Login", "Authentication", FormMethod.Post))
             {
                 <div class="form-group">
@@ -52,6 +55,5 @@
                 </p>
             }
         </div>
-        <!-- //login -->
     </div>
 </div>

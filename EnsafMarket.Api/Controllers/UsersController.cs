@@ -45,6 +45,15 @@ namespace EnsafMarket.Api.Controllers
                 return BadRequest(response);
             }
 
+            // Check if there is already an account with the same email
+            bool emailExists = context.User.Where(u => u.Email == request.Email.ToLower()).Any();
+            if(emailExists)
+            {
+                response.Result = false;
+                response.Message = "Email already in use by a different account.";
+                return Ok(response);
+            }
+
             IHasher hasher = new BCryptHasher();
             User user = new User()
             {

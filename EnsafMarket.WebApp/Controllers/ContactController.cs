@@ -35,22 +35,6 @@ namespace EnsafMarket.WebApp.Controllers
             }
             var contact = response.Contact;
 
-         /*   var advertisementResponse = await emClient.GetAdvertisementAsync(contact.AdvertisementId);
-            contact.Advertisement = advertisementResponse.Advertisement;
-
-            var ownerResponse = await emClient.GetUserAsync(contact.Advertisement.OwnerId);
-            contact.Advertisement.Owner = ownerResponse.User;
-
-            if (contact.UserId == user.Id)
-            {
-                contact.User = user;
-            }
-            else
-            {
-                var userResponse = await emClient.GetUserAsync((int)contact.UserId);
-                contact.User = userResponse.User;
-            }
-            */
             if (user.Id != contact.UserId && user.Id != contact.Advertisement.OwnerId)
             {
                 return HttpNotFound();
@@ -63,9 +47,9 @@ namespace EnsafMarket.WebApp.Controllers
             var contactMessagesResponse = await emClient.GetContactMessagesAsync(contact.Id);
             var contactMessages = contactMessagesResponse.ContactMessages;
 
-            foreach(var message in contactMessages)
+            foreach (var message in contactMessages)
             {
-                message.User = message.UserId == user.Id ? user : contact.Advertisement.Owner;
+                message.User = message.UserId == contact.UserId ? contact.User : contact.Advertisement.Owner;
             }
 
             var model = new ContactDetailsModelView
@@ -102,24 +86,6 @@ namespace EnsafMarket.WebApp.Controllers
             }
             var contact = response.Contact;
 
-            /*
-            var advertisementResponse = await emClient.GetAdvertisementAsync(contact.AdvertisementId);
-            contact.Advertisement = advertisementResponse.Advertisement;
-
-            var ownerResponse = await emClient.GetUserAsync(contact.Advertisement.OwnerId);
-            contact.Advertisement.Owner = ownerResponse.User;
-            */
-            /*
-            if(contact.UserId == user.Id)
-            {
-                contact.User = user;
-            }
-            else
-            {
-                var userResponse = await emClient.GetUserAsync((int)contact.UserId);
-                contact.User = userResponse.User;
-            }
-            */
             if (user.Id != contact.UserId && user.Id != contact.Advertisement.OwnerId)
             {
                 return HttpNotFound();

@@ -3,275 +3,296 @@
 @{
     ViewData["Title"] = "Contact";
     bool newFeedback = Model.MyFeedback == null;
+
+    User otherUser;
+    if (Model.User.Id == Model.Contact.User.Id)
+    {
+        otherUser = Model.Contact.Advertisement.Owner;
+    }
+    else
+    {
+        otherUser = Model.Contact.User;
+    }
 }
 
 <style>
     .rating {
-    display: flex;
-    flex-direction: row-reverse;
-    justify-content: center
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center
     }
 
-    .rating > input {
-        display: none
-    }
-
-    .rating > label {
-        position: relative;
-        width: 1em;
-        font-size: 2.5em;
-        color: #FFD600;
-        cursor: pointer
-    }
-
-        .rating > label::before {
-            content: "\2605";
-            position: absolute;
-            opacity: 0
+        .rating > input {
+            display: none
         }
 
-        .rating > label:hover:before,
-        .rating > label:hover ~ label:before {
-            opacity: 1 !important
+        .rating > label {
+            position: relative;
+            width: 1em;
+            font-size: 2.5em;
+            color: #FFD600;
+            cursor: pointer
         }
 
-    .rating > input:checked ~ label:before {
-        opacity: 1
-    }
+            .rating > label::before {
+                content: "\2605";
+                position: absolute;
+                opacity: 0
+            }
 
-    .rating:hover > input:checked ~ label:before {
-        opacity: 0.4
-    }
+            .rating > label:hover:before,
+            .rating > label:hover ~ label:before {
+                opacity: 1 !important
+            }
+
+        .rating > input:checked ~ label:before {
+            opacity: 1
+        }
+
+        .rating:hover > input:checked ~ label:before {
+            opacity: 0.4
+        }
 </style>
 
-<section class="py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Contact #@Model.Contact.Id</h1>
-                <p>A propos de <a href="@Url.Action("Details", "Advertisement", new { id = Model.Contact.AdvertisementId })">@Model.Contact.Advertisement.Title</a></p>
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>Contact #@Model.Contact.Id</h1>
+            <p>A propos de <a href="@Url.Action("Details", "Advertisement", new { id = Model.Contact.AdvertisementId })">@Model.Contact.Advertisement.Title</a></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h4>Description</h4>
+            <p>@Model.Contact.Advertisement.Description</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-outline-primary" onClick="window.location.reload();">Actualiser</button>
+        </div>
+    </div>
+
+    <div class="row mt-2">
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Envoyer un message à @Html.ActionLink($"{otherUser.FirstName} {otherUser.LastName}", "Details", "Profile", new { id = otherUser.Id }, null)</h3>
+                </div>
+            </div>
+            <div class="row my-2">
+                <div class="col-md-12">
+                    @using (Html.BeginForm("Details", "Contact", new { id = Model.Contact.Id }, FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            @Html.TextAreaFor(m => m.ContactMessage, new { @class = "form-control", placeholder = "Ecrivez votre message ici", rows = 3 })
+                        </div>
+                        @Html.Hidden(nameof(Model.Action), "Message")
+                        <button type="submit" class="btn btn-primary">Envoyer</button>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @if (Model.MessageErrorMessage != null)
+                    {
+                        <div class="row pt-4">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" role="alert">
+                                    @Model.MessageErrorMessage
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    @foreach (var contactMessage in Model.Messages)
+                    {
+                        <div class="row">
+                            <div class="col-md-12">
+                                @Html.Partial("_ContactMessagePartial", contactMessage)
+                            </div>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h3>Envoyer un message à @Model.Contact.Advertisement.Owner.FirstName @Model.Contact.Advertisement.Owner.LastName</h3>
-                    </div>
+        <div class="col-md-6">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Feedbacks</h2>
                 </div>
-                <div class="row my-2">
-                    <div class="col-md-12">
-                        @using (Html.BeginForm("Details", "Contact", new { id = Model.Contact.Id }, FormMethod.Post))
-                        {
-                            <div class="form-group">
-                                @Html.TextAreaFor(m => m.ContactMessage, new { @class = "form-control", placeholder = "Ecrivez votre message ici", rows = 3 })
-                            </div>
-                            @Html.Hidden(nameof(Model.Action), "Message")
-                            <button type="submit" class="btn btn-primary">Envoyer</button>
-                        }
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @if (Model.MessageErrorMessage != null)
-                        {
-                            <div class="row pt-4">
-                                <div class="col-md-12">
-                                    <div class="alert alert-danger" role="alert">
-                                        @Model.MessageErrorMessage
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        @foreach (var contactMessage in Model.Messages)
-                        {
+            </div>
+
+            <!-- Owner feedback -->
+            <div class="row my-2">
+                <div class="col-md-12">
+                    <div class="card w-100">
+                        <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @Html.Partial("_ContactMessagePartial", contactMessage)
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Feedback de <b>@Html.ActionLink($"{Model.Contact.Advertisement.Owner.FirstName} {Model.Contact.Advertisement.Owner.LastName}", "Details", "Profile", new { id = Model.Contact.Advertisement.Owner.Id }, null)</b>
+                                        </div>
+                                    </div>
+                                    @if (Model.OwnerFeedback != null)
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                @for (int i = 0; i < Model.OwnerFeedback.Rating; i++)
+                                                {
+                                                    <span style="color: #FFD600; font-size: 1.5em;">★</span>
+                                                }
+                                                @for (int i = Model.OwnerFeedback.Rating; i < 5; i++)
+                                                {
+                                                    <span style="color: #FFD600; font-size: 1.5em;">☆</span>
+                                                }
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>
+                                                    @Model.OwnerFeedback.Feedback
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>
+                                                    @Model.Contact.Advertisement.Owner.FirstName @Model.Contact.Advertisement.Owner.LastName n'as pas encore laissé de commentaire
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
-                        }
+                        </div>
                     </div>
+
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h2>Feedbacks</h2>
-                    </div>
-                </div>
-
-                <!-- Owner feedback -->
-                <div class="row my-2">
-                    <div class="col-md-12">
-                        <div class="card w-100">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
+            <!-- User feedback -->
+            <div class="row my-2">
+                <div class="col-md-12">
+                    <div class="card w-100">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            Feedback de <b>@Html.ActionLink($"{Model.Contact.User.FirstName} {Model.Contact.User.LastName}", "Details", "Profile", new { id = Model.Contact.UserId }, null)</b>
+                                        </div>
+                                    </div>
+                                    @if (Model.UserFeedback != null)
+                                    {
                                         <div class="row">
                                             <div class="col-md-12">
-                                                Feedback de <b>@Model.Contact.Advertisement.Owner.FirstName @Model.Contact.Advertisement.Owner.LastName</b>
+                                                @for (int i = 0; i < Model.UserFeedback.Rating; i++)
+                                                {
+                                                    <span style="color: #FFD600; font-size: 1.5em;">★</span>
+                                                }
+                                                @for (int i = Model.UserFeedback.Rating; i < 5; i++)
+                                                {
+                                                    <span style="color: #FFD600; font-size: 1.5em;">☆</span>
+                                                }
                                             </div>
                                         </div>
-                                        @if (Model.OwnerFeedback != null)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    @for (int i = 0; i < Model.OwnerFeedback.Rating; i++)
-                                                    {
-                                                        <span style="color: #FFD600; font-size: 1.5em;">★</span>
-                                                    }
-                                                    @for (int i = Model.OwnerFeedback.Rating; i < 5; i++)
-                                                    {
-                                                        <span style="color: #FFD600; font-size: 1.5em;">☆</span>
-                                                    }
-                                                </div>
-                                            </div>
 
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>
-                                                        @Model.OwnerFeedback.Feedback
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>
-                                                        @Model.Contact.Advertisement.Owner.FirstName @Model.Contact.Advertisement.Owner.LastName n'as pas encore laissé de commentaire
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- User feedback -->
-                <div class="row my-2">
-                    <div class="col-md-12">
-                        <div class="card w-100">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-12">
-                                                Feedback de <b>@Model.Contact.User.FirstName @Model.Contact.User.LastName</b>
+                                                <p>
+                                                    @Model.UserFeedback.Feedback
+                                                </p>
                                             </div>
                                         </div>
-                                        @if (Model.UserFeedback != null)
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    @for (int i = 0; i < Model.UserFeedback.Rating; i++)
-                                                    {
-                                                        <span style="color: #FFD600; font-size: 1.5em;">★</span>
-                                                    }
-                                                    @for (int i = Model.UserFeedback.Rating; i <= 5; i++)
-                                                    {
-                                                        <span style="color: #FFD600; font-size: 1.5em;">☆</span>
-                                                    }
-                                                </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <p>
+                                                    @Model.Contact.User.FirstName @Model.Contact.User.LastName n'as pas encore laissé de commentaire
+                                                </p>
                                             </div>
-
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>
-                                                        @Model.UserFeedback.Feedback
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }
-                                        else
-                                        {
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <p>
-                                                        @Model.Contact.Advertisement.Owner.FirstName @Model.Contact.Advertisement.Owner.LastName n'as pas encore laissé de commentaire
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="col-md-12">
-                                @if (newFeedback)
-                                {
-                                    <h3>Ecrire un commentaire</h3>
-                                }
-                                else
-                                {
-                                    <h3>Mettre à jour votre commentaire</h3>
-                                }
-                            </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            @if (newFeedback)
+                            {
+                                <h3>Ecrire un commentaire</h3>
+                            }
+                            else
+                            {
+                                <h3>Mettre à jour votre commentaire</h3>
+                            }
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @using (Html.BeginForm("Details", "Contact", new { id = Model.Contact.Id }, FormMethod.Post))
-                                        {
-                                            <div class="form-group">
-                                                <div class="rating">
-                                                    @for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        @Html.RadioButton(nameof(Model.Rating), 6 - i, new { id = $"rating-{i}" })
-                                                        @Html.Label("☆", new { @for = $"rating-{i}" })
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                @Html.TextAreaFor(m => m.Feedback, new { @class = "form-control", placeholder = "Ecrivez votre commentaire ici", rows = 3 })
-                                            </div>
-                                            @Html.Hidden(nameof(Model.Action), newFeedback ? "Feedback" : "UpdateFeedback")
-                                            <button type="submit" class="btn btn-primary">
-                                                @if (newFeedback)
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @using (Html.BeginForm("Details", "Contact", new { id = Model.Contact.Id }, FormMethod.Post))
+                                    {
+                                        <div class="form-group">
+                                            <div class="rating">
+                                                @for (int i = 1; i <= 5; i++)
                                                 {
-                                                    <text>Soumettre</text>
+                                                    @Html.RadioButton(nameof(Model.Rating), 6 - i, new { id = $"rating-{i}" })
+                                                    @Html.Label("☆", new { @for = $"rating-{i}" })
                                                 }
-                                                else
-                                                {
-                                                    <text>Mettre à jour</text>
-                                                }
-                                            </button>
-                                        }
-                                    </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            @Html.TextAreaFor(m => m.Feedback, new { @class = "form-control", placeholder = "Ecrivez votre commentaire ici", rows = 3 })
+                                        </div>
+                                        @Html.Hidden(nameof(Model.Action), newFeedback ? "Feedback" : "UpdateFeedback")
+                                        <button type="submit" class="btn btn-primary">
+                                            @if (newFeedback)
+                                            {
+                                                <text>Soumettre</text>
+                                            }
+                                            else
+                                            {
+                                                <text>Mettre à jour</text>
+                                            }
+                                        </button>
+                                    }
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        @if (Model.FeedbackErrorMessage != null)
-                                        {
-                                            <div class="row pt-4">
-                                                <div class="col-md-12">
-                                                    <div class="alert alert-danger" role="alert">
-                                                        @Model.FeedbackErrorMessage
-                                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (Model.FeedbackErrorMessage != null)
+                                    {
+                                        <div class="row pt-4">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-danger" role="alert">
+                                                    @Model.FeedbackErrorMessage
                                                 </div>
                                             </div>
-                                        }
-                                    </div>
+                                        </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -279,4 +300,4 @@
                 </div>
             </div>
         </div>
-</section>
+    </div>
