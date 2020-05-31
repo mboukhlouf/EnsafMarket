@@ -16,8 +16,24 @@ namespace EnsafMarket.WebApp.Controllers
         [Route("Dashboard")]
         public async Task<ActionResult> Index()
         {
+            await GetUserAsync();
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Authentication");
+            }
 
-            return View(new DashboardViewModel());
+            var advertisementsResponse = await emClient.GetUserAdvertisementsAsync(user.Id);
+            var advertisements = advertisementsResponse.Advertisements;
+
+            var contactsResponse = await emClient.GetUserContactsAsync(user.Id);
+            var contacts = contactsResponse.Contacts;
+
+            return View(new DashboardViewModel
+            {
+                Advertisements = advertisements,
+                Contacts = contacts,
+                User = user
+            });
         }
     }
 }

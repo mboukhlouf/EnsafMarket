@@ -17,9 +17,10 @@
     <link href="~/Content/css/em-theme.css" rel="stylesheet" />
     <!-- Styles -->
     <link href="~/Content/css/style.css" rel="stylesheet" />
-
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <!-- Data tables -->
+    <link href="~/Content/css/dataTables.bootstrap4.css" rel="stylesheet" />
 </head>
 <body>
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom shadow-sm">
@@ -67,9 +68,9 @@
         </nav>
     </div>
 
-    <div main>
+    <main>
         @RenderBody()
-    </div>
+    </main>
 
     <div class="footer-basic">
         <footer>
@@ -97,5 +98,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
+
+    <script src="~/Scripts/scripts.js"></script>
 </body>
 </html>

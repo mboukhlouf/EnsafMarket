@@ -37,7 +37,7 @@ namespace EnsafMarket.WebApp.Controllers
             if (response.Result)
             {
                 Response.Cookies.Add(new HttpCookie("token", emClient.Token));
-                return RedirectToAction("Index", "Advertisements");
+                return RedirectToAction("Offers", "Advertisements");
             }
             model.Password = null;
             model.ErrorMessage = "Email/Mot de passe invalide";

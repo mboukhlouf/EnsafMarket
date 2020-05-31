@@ -153,7 +153,9 @@ namespace EnsafMarket.Api.Controllers
             }
 
             var contacts = context.Contact.AsQueryable();
-            contacts = contacts.Where(contact => contact.Advertisement.OwnerId == id || contact.UserId == id);
+            contacts = contacts.Where(contact => contact.Advertisement.OwnerId == id || contact.UserId == id)
+                .Include(nameof(Contact.User))
+                .Include(nameof(Contact.Advertisement));
             return new GetUserContactsResponse
             {
                 Result = true,

@@ -1,0 +1,99 @@
+﻿@model EnsafMarket.WebApp.ViewModels.DashboardViewModel
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<section class="py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Tableau de bord</h1>
+                <p>Vous trouvez vos annonces et vos contacts ici!</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Vos annonces</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table id="table-advertisements" class="table w-100">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titre</th>
+                            <th scope="col">Type</th>
+                            <th scope="col">Date</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var advertisement in Model.Advertisements)
+                        {
+                            var type = advertisement.Type == EnsafMarket.Core.Models.AdvertisementType.Offer ? "Offre" : "Demande";
+                            var contentType = advertisement.ContentType == EnsafMarket.Core.Models.AdvertisementContentType.Product ? "Produit" : "Service";
+                            var subtitle = $"{type} de {contentType.ToLower()}";
+
+                            <tr>
+                                <th scope="row">
+                                @Html.ActionLink($"{advertisement.Id}", "Details", "Advertisement", new { id = advertisement.Id }, null)
+                                </th>
+                                <td>@Html.ActionLink(advertisement.Title, "Details", "Advertisement", new { id = advertisement.Id }, null)</td>
+                                <td>@subtitle</td>
+                                <td>@advertisement.CreatedAt</td>
+                                <td>
+                                    @using (Html.BeginForm("Details", "Advertisement", new { id = advertisement.Id }, FormMethod.Get))
+                                    {
+                                        <button class="btn btn-outline-primary" type="submit">Détails</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Vos contacts</h2>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <table id="table-contacts" class="table w-100">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Annonce</th>
+                            <th scope="col">Initié par</th>
+                            <th scope="col">Date</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var contact in Model.Contacts)
+                        {
+                            <tr>
+                                <th scope="row">@contact.Id</th>
+                                <td>@Html.ActionLink(@contact.Advertisement.Title, "Details", "Advertisement", new { id = contact.Advertisement.Id }, null)</td>
+                                <td>@Html.ActionLink($"{contact.User.FirstName} {contact.User.LastName}", "Details", "Profile", new { id = @contact.User.Id }, null)</td>
+                                <td>@contact.CreatedAt</td>
+                                <td>
+                                    @using (Html.BeginForm("Details", "Contact", new { id = contact.Id }, FormMethod.Get))
+                                    {
+                                        <button class="btn btn-outline-primary" type="submit">Détails</button>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+</section>
