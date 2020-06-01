@@ -15,6 +15,11 @@ namespace EnsafMarket.ApiClient
         {
             private static string Controller { get; } = "Users";
 
+            public static EndpointData GetUsers()
+            {
+                return new EndpointData(new Uri($"{ApiPrefix}/{Controller}"), HttpMethod.Get, EndpointSecurityType.None);
+            }
+
             public static EndpointData Login()
             {
                 return new EndpointData(new Uri($"{ApiPrefix}/{Controller}/Login"), HttpMethod.Post, EndpointSecurityType.None);
@@ -74,6 +79,11 @@ namespace EnsafMarket.ApiClient
         public static class Contacts
         {
             private static string Controller { get; } = "Contacts";
+
+            public static EndpointData GetContacts()
+            {
+                return new EndpointData(new Uri($"{ApiPrefix}/{Controller}"), HttpMethod.Get, EndpointSecurityType.None);
+            }
 
             public static EndpointData GetContact(int id)
             {

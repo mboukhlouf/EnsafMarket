@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Utilisateurs";
+}
+@model EnsafMarket.WebApp.Areas.Admin.ViewModels.UsersViewModel
+
+
+<div class="container-fluid">
+    <h1 class="mt-4">Utilisateurs</h1>
+    <div class="card mb-4">
+        <div class="card-header"><i class="fas fa-table mr-1"></i>Liste des utilisateurs</div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Status</th>
+                            <th>Email</th>
+                            <th>Date de naissance</th>
+                            <th>CNE</th>
+                            <th>Filière</th>
+                            <th>Année</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Nom</th>
+                            <th>Status</th>
+                            <th>Email</th>
+                            <th>Date de naissance</th>
+                            <th>CNE</th>
+                            <th>Filière</th>
+                            <th>Année</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        @foreach (var user in Model.Users)
+                        {
+                            <tr>
+                                <td>@user.Id</td>
+                                <td>@user.FirstName @user.LastName</td>
+                                <td>@user.Status</td>
+                                <td>@user.Email</td>
+                                <td>@user.DateOfBirth</td>
+                                <td>@user.Cne</td>
+                                <td>@user.Major</td>
+                                <td>@user.Year</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

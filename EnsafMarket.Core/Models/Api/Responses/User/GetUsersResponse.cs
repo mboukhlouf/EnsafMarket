@@ -5,8 +5,8 @@ using System.Text;
 
 namespace EnsafMarket.Core.Models.Api.Responses
 {
-    public class GetContactsResponse : BaseResponse
+    public class GetUsersResponse : BaseResponse
     {
-        public IEnumerable<Contact> Contacts { get; set; }
+        public IEnumerable<User> Users { get; set; }
     }
 }

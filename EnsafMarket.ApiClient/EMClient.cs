@@ -49,6 +49,12 @@ namespace EnsafMarket.ApiClient
         }
 
         #region User
+        public async Task<GetUsersResponse> GetUsersAsync()
+        {
+            var endpoint = Endpoints.Users.GetUsers();
+            var response = await apiProcessor.ProcessRequestAsync<GetUsersResponse>(endpoint);
+            return response;
+        }
 
         public async Task<RegisterResponse> RegisterAsync(RegisterRequest request)
         {
@@ -108,6 +114,12 @@ namespace EnsafMarket.ApiClient
         #endregion
 
         #region Advertisement
+        public async Task<GetAdvertisementsResponse> GetAdvertisementsAsync()
+        {
+            var endpoint = Endpoints.Advertisements.GetAdvertisements();
+            var response = await apiProcessor.ProcessRequestAsync<GetAdvertisementsResponse>(endpoint);
+            return response;
+        }
 
         public async Task<GetAdvertisementsResponse> GetAdvertisementsAsync(GetAdvertisementsRequest request)
         {
@@ -144,6 +156,13 @@ namespace EnsafMarket.ApiClient
         #endregion
 
         #region Contact
+        public async Task<GetContactsResponse> GetContactsAsync()
+        {
+            var endpoint = Endpoints.Contacts.GetContacts();
+            var response = await apiProcessor.ProcessRequestAsync<GetContactsResponse>(endpoint);
+            return response;
+        }
+
         public async Task<GetContactResponse> GetContactAsync(int id)
         {
             var endpoint = Endpoints.Contacts.GetContact(id);

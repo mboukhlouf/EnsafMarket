@@ -25,6 +25,22 @@ namespace EnsafMarket.Api.Controllers
             this.context = context;
         }
 
+        [Route("")]
+        [AllowAnonymous]
+        public async Task<ActionResult<GetContactsResponse>> GetContactsAsync()
+        {
+            // NEED TO BE ONLY ACCESSIBLE BY ADMIN
+            var contacts = await context.Contact.Include(nameof(Contact.User))
+                                          .Include(nameof(Contact.Advertisement))
+                                          .ToListAsync();
+
+            return new GetContactsResponse
+            {
+                Result = true,
+                Contacts = contacts
+            };
+        }
+
         // GET: api/Contact/5
         [HttpGet("{id}")]
         [Authorize]
@@ -93,7 +109,7 @@ namespace EnsafMarket.Api.Controllers
                 return NotFound(response);
             }
 
-            if(advertisement.OwnerId == userClaims.Id)
+            if (advertisement.OwnerId == userClaims.Id)
             {
                 response.Result = false;
                 response.Message = "You can't create a contact with yourself";
@@ -133,7 +149,7 @@ namespace EnsafMarket.Api.Controllers
             var contact = await context.Contact.FindAsync(id);
             contact.Advertisement = await context.Advertisement.FindAsync(contact.AdvertisementId);
 
-            if(userClaims.Id != contact.UserId &&
+            if (userClaims.Id != contact.UserId &&
                 userClaims.Id != contact.Advertisement.OwnerId)
             {
                 return Unauthorized(new GetContactMessagesResponse
@@ -199,7 +215,7 @@ namespace EnsafMarket.Api.Controllers
                 ContactMessage = contactMessage
             });
         }
-    
+
         [HttpGet("{id}/Feedbacks")]
         [Authorize]
         public async Task<ActionResult<GetContactFeedbacksResponse>> GetContactFeedbacksAsync(int id)
@@ -266,7 +282,7 @@ namespace EnsafMarket.Api.Controllers
                 });
             }
 
-            if(contact.Feedbacks != null && contact.Feedbacks.Any(feedback => feedback.FromUserId == userClaims.Id))
+            if (contact.Feedbacks != null && contact.Feedbacks.Any(feedback => feedback.FromUserId == userClaims.Id))
             {
                 return Unauthorized(new GetContactMessagesResponse
                 {
@@ -280,7 +296,7 @@ namespace EnsafMarket.Api.Controllers
             if (fromId == contact.UserId)
             {
                 toId = contact.Advertisement.OwnerId;
-            } 
+            }
             else
             {
                 toId = (int)contact.UserId;

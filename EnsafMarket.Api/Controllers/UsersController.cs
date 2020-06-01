@@ -33,6 +33,20 @@ namespace EnsafMarket.Api.Controllers
             this.context = context;
         }
 
+        [Route("")]
+        [AllowAnonymous]
+        public async Task<ActionResult<GetUsersResponse>> GetUsersAsync()
+        {
+            // NEED TO BE ONLY ACCESSIBLE BY ADMIN
+            var users = await context.User.ToListAsync();
+
+            return new GetUsersResponse
+            {
+                Result = true,
+                Users = users
+            };
+        }
+
         [HttpPost("[action]")]
         [AllowAnonymous]
         public async Task<ActionResult<RegisterResponse>> Register(RegisterRequest request)
