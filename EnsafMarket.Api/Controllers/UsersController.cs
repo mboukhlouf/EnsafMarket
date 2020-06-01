@@ -111,9 +111,9 @@ namespace EnsafMarket.Api.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{id?}")]
+        [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ActionResult<GetUserResponse>> GetAsync(int? id = null)
+        public async Task<ActionResult<GetUserResponse>> GetAsync(int? id)
         {
             var response = new GetUserResponse();
             User user;
@@ -146,6 +146,13 @@ namespace EnsafMarket.Api.Controllers
                 response.Message = "User not found.";
                 return NotFound(response);
             }
+        }
+
+        [HttpGet("Current")]
+        [AllowAnonymous]
+        public Task<ActionResult<GetUserResponse>> GetCurrentAsync()
+        {
+            return GetAsync(null);
         }
 
         [HttpGet("{id}/Advertisements")]

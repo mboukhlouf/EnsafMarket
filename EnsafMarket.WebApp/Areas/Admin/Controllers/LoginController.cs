@@ -15,5 +15,11 @@ namespace EnsafMarket.WebApp.Areas.Admin.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public async Task<ActionResult> Index(dynamic obj)
+        {
+            return RedirectToAction("Index", "Users");
+        }
     }
 }

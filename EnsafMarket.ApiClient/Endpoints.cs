@@ -32,7 +32,7 @@ namespace EnsafMarket.ApiClient
 
             public static EndpointData GetUser()
             {
-                return new EndpointData(new Uri($"{ApiPrefix}/{Controller}"), HttpMethod.Get, EndpointSecurityType.ApiKey);
+                return new EndpointData(new Uri($"{ApiPrefix}/{Controller}/Current"), HttpMethod.Get, EndpointSecurityType.ApiKey);
             }
 
             public static EndpointData GetUser(int id)
